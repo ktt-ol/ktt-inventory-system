@@ -1,0 +1,288 @@
+# German Translation for the inventar system
+# Copyright (C) 2012 Sebastian Reichel
+# This file is distributed under the same license as the inventar package.
+# Sebastian Reichel <sre@ring0.de>, 2012
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-07-27 00:26+0200\n"
+"PO-Revision-Date: 2012-06-20 22:12+0200\n"
+"Last-Translator: Sebastian Reichel <sre@ring0.de>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: inventar/settings.py:22
+msgid "German"
+msgstr "Deutsch"
+
+#: inventar/settings.py:23
+msgid "English"
+msgstr "Englisch"
+
+#: inventar/templates/base.html:16
+msgid "Home"
+msgstr "Startseite"
+
+#: inventar/templates/base.html:17
+msgid "Admin Area"
+msgstr "Admin Bereich"
+
+#: inventar/templates/base.html:19
+msgid "Search Item"
+msgstr "Gegenstand suchen"
+
+#: inventar/templates/base.html:21
+msgid "Get Item by ID"
+msgstr "Suche Gegenstand per Barcode"
+
+#: inventar/templates/base.html:22
+msgid "Search Item by Name and Description"
+msgstr "Suche Gegenstand per Name/Beschreibung"
+
+#: inventar/templates/item.html:13 inventar/templates/search.html:10
+msgid "Name"
+msgstr "Name"
+
+#: inventar/templates/item.html:18 inventar/templates/search.html:11
+msgid "Codes"
+msgstr "Barcodes"
+
+#: inventar/templates/item.html:23
+msgid "Description"
+msgstr "Beschreibung"
+
+#: inventar/templates/item.html:29
+msgid "Image"
+msgstr "Bild"
+
+#: inventar/templates/item.html:30
+msgid "image from item"
+msgstr "Bild vom Gegenstand"
+
+#: inventar/templates/item.html:35 inventory/models.py:69
+msgid "in use"
+msgstr "in Benutzung"
+
+#: inventar/templates/item.html:44
+msgid "Parent"
+msgstr "Container"
+
+#: inventar/templates/item.html:61
+msgid "temporary Parent"
+msgstr "temporärer Container"
+
+#: inventar/templates/item.html:79
+msgid "Children"
+msgstr "Kinder"
+
+#: inventar/templates/item.html:92
+msgid "No Children defined!"
+msgstr "Keine Kinder definiert!"
+
+#: inventar/templates/item.html:99
+msgid "Tags"
+msgstr "Tags"
+
+#: inventar/templates/item.html:112
+msgid "No Tags defined!"
+msgstr "Keine Tags definiert!"
+
+#: inventar/templates/item.html:119
+msgid "Owner"
+msgstr "Besitzer"
+
+#: inventar/templates/search.html:5
+msgid "searching for"
+msgstr "Suche nach"
+
+#: inventory/filters.py:8
+msgid "has parent"
+msgstr "hat Container"
+
+#: inventory/filters.py:22 inventory/filters.py:56 inventory/filters.py:90
+msgid "Yes"
+msgstr "Ja"
+
+#: inventory/filters.py:23 inventory/filters.py:57 inventory/filters.py:91
+msgid "No"
+msgstr "Nein"
+
+#: inventory/filters.py:42
+msgid "has barcode"
+msgstr "hat Barcode"
+
+#: inventory/filters.py:76
+msgid "has icon"
+msgstr "hat Icon"
+
+#: inventory/models.py:12
+msgid "tag"
+msgstr "Tag"
+
+#: inventory/models.py:13 inventory/models.py:77
+msgid "tags"
+msgstr "Tags"
+
+#: inventory/models.py:23 inventory/models.py:61
+msgid "business area"
+msgstr "Geschäftsbereich"
+
+#: inventory/models.py:24
+msgid "business areas"
+msgstr "Geschäftsbereiche"
+
+#: inventory/models.py:33 inventory/models.py:62
+msgid "category"
+msgstr "Kategorie"
+
+#: inventory/models.py:34
+msgid "categories"
+msgstr "Kategorien"
+
+#: inventory/models.py:44
+msgid "acquisition type"
+msgstr "Anschaffungsart"
+
+#: inventory/models.py:45
+msgid "acquisition types"
+msgstr "Anschaffungsarten"
+
+#: inventory/models.py:55 inventory/models.py:79
+msgid "owner"
+msgstr "Besitzer"
+
+#: inventory/models.py:56
+msgid "owners"
+msgstr "Besitzer"
+
+#: inventory/models.py:60
+msgid "description"
+msgstr "Beschreibung"
+
+#: inventory/models.py:63
+msgid "decommissioned"
+msgstr "ausgesondert"
+
+#: inventory/models.py:64
+msgid "target quantity"
+msgstr "Soll-Menge"
+
+#: inventory/models.py:65
+msgid "deprecation"
+msgstr "Absetzung für Abnutzungen (AfA)"
+
+#: inventory/models.py:66
+msgid "datasheet"
+msgstr "Datenblatt"
+
+#: inventory/models.py:67
+msgid "parent"
+msgstr "Container"
+
+#: inventory/models.py:68
+msgid "temporal parent"
+msgstr "temporärer Container"
+
+#: inventory/models.py:70
+msgid "supplier"
+msgstr "Lieferant"
+
+#: inventory/models.py:71
+msgid "note"
+msgstr "Notiz"
+
+#: inventory/models.py:72
+msgid "EAN"
+msgstr "EAN"
+
+#: inventory/models.py:73
+msgid "premium"
+msgstr "Premium"
+
+#: inventory/models.py:74
+msgid "unlabeled"
+msgstr "nicht etikettiert"
+
+#: inventory/models.py:75
+msgid "image"
+msgstr "Bild (URL)"
+
+#: inventory/models.py:76
+msgid "contact"
+msgstr "Kontakt"
+
+#: inventory/models.py:78
+msgid "permanent loan"
+msgstr "Dauerleihgabe"
+
+#: inventory/models.py:85 inventory/models.py:121
+msgid "barcodes"
+msgstr "Barcodes"
+
+#: inventory/models.py:102
+#, python-format
+msgid "%(name)s (codes: %(barcodes)s)"
+msgstr "%(name)s (Codes: %(barcodes)s)"
+
+#: inventory/models.py:105
+msgid "item"
+msgstr "Gegenstand"
+
+#: inventory/models.py:106
+msgid "items"
+msgstr "Gegenstände"
+
+#: inventory/models.py:120
+msgid "barcode"
+msgstr "Barcode"
+
+#: inventory/models.py:134
+msgid "acquisition"
+msgstr "Anschaffung"
+
+#: inventory/models.py:135
+msgid "acquisitions"
+msgstr "Anschaffungen"
+
+#: inventory/models.py:138
+msgid "Item"
+msgstr "Gegenstand"
+
+#: inventory/models.py:139
+msgid "Date"
+msgstr "Datum"
+
+#: inventory/models.py:140
+msgid "Revenue"
+msgstr "Ertrag"
+
+#: inventory/models.py:140
+msgid "Please use the following format: <em>Money in Cent</em>."
+msgstr "Bitte das folgende Format benutzen: <em>Geldbetrag in Cent</em>."
+
+#: inventory/models.py:141
+msgid "Reason"
+msgstr "Grund"
+
+#: inventory/models.py:147
+msgid "elimination"
+msgstr "Aussonderung"
+
+#: inventory/models.py:148
+msgid "eliminations"
+msgstr "Aussonderungen"
+
+#: inventory/models.py:159 inventory/models.py:160
+msgid "inventory"
+msgstr "Bestand"
+
+#~ msgid "No parent defined!"
+#~ msgstr "Kein Container definiert!"
+
+#~ msgid "Move along folks, nothing to see here!"
+#~ msgstr "Bitte weitergehen, hier gibt es nichts zu sehen!"
