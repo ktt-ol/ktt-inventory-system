@@ -1,0 +1,25 @@
+{% load graph_extras %}
+# Graph of KtT Inventory
+#
+# Usage:
+#   wget -O graph.txt "http://hackspace.elektranox.org/graph/"
+#   graph-easy --dot graph.txt > graph.dot
+#   dot -Tsvg < graph.dot > graph1.svg
+#   twopi -Tsvg < graph.dot > graph2.svg
+#   circo -Tsvg <  graph.dot > graph3.svg
+
+graph {
+	label: Graph of KtT Items;
+	autolink: name;
+	linkbase: http://hackspace.elektranox.org/item/
+}
+
+{% autoescape off %}
+{% for item in items %}
+{% if item.parent %}
+[{{item.one_barcode}}] { label: "{{item.name|graphescape}}" } -> [{{item.parent.one_barcode}}]
+{% else %}
+[{{item.one_barcode}}] { label: "{{item.name|graphescape}}" }
+{% endif %}
+{% endfor %}
+{% endautoescape %}

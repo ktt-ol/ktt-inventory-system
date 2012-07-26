@@ -1,0 +1,17 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+	{{ block.super }}
+	<link rel="stylesheet" href="/static/chosen/chosen.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/static/chosen/chosen.jquery.js"></script>
+	<script type="text/javascript" src="/static/chosen/chosen.jquery_ready.js"></script>
+{% endblock %}
+
+{% block after_related_objects %}
+	{{ block.super }}
+	<script type="text/javascript">
+		$(".chzn-select").chosen();
+		$(".chzn-select-deselect").chosen({allow_single_deselect:true});
+	</script>
+{% endblock %}

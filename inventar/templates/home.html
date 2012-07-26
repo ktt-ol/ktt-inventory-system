@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+	<h2>Verwendung:</h2>
+
+	<h3>Fall 1: Suchen eines Gegenstands</h3>
+	<p>
+		<ol>
+			<li>Den gesuchten Gegenstand links in die Suchmaske eingeben.</li>
+			<li>Die Suchergebnisse erscheinen im Hauptfenster.</li>
+			<li>Suchergebnis auswählen.</li>
+			<li>Der Pfad zum Gegenstand ist als Baum dargestellt.</li>
+		</ol>
+	</p>
+
+	<h3>Fall 2: Zurückbringen eines Gegenstands</h3>
+	<p>
+		<ol>
+			<li>Alle Gegenständen ist mindestens ein viertstelliger Code zugewiesen.</li>
+			<li>Dieser kann einfach links in das Code Suchfeld eingetragen werden.</li>
+			<li>Man gelangt so direkt zu der Info Seite des Gegenstands.</li>
+			<li>Unter dem Pfad lässt sich der Ablageort des Gegenstands finden.</li>
+		</ol>
+	</p>
+
+	<h3>Fall 3: Einräumen einer Kiste/eines Schrankes/...</h3>
+	<p>
+		<ol>
+			<li>Die Seite des Gegenstands öffnen, der befüllt werden soll.</li>
+			<li>Dort gibt es ein Feld "Kinderelemente", welche alle Gegenstände listet,
+			    die Unterlemente sind.</li>
+		</ol>
+	</p>
+
+	<h3>Sonstige Erklärungen</h3>
+	<p>
+		<ol>
+			<li>Einige Gegenstände haben temporär einen gesonderten Ort. Der Pfad zu diesem wird
+			    direkt unter dem normalen Pfad dargestellt.</li>
+			<li>Ob Gegenstände frei zur Verfügung stehen lässt sich an dem "in Benutzung" Feld
+			    erkennen (Das Icon sind zwei Zahnräder).</li>
+			<li>Bei einigen Gegenständen handelt es sich um Dauerleihgaben von Mitgliedern. Dies
+			    lässt sich am Besitzer Feld erkennen. Das Feld ist nur bei Gegenständen vorhanden,
+			    welche auch einen Besitzer haben (Das Icon ist eine Person).</li>
+		</ol>
+	</p>
+
+
+{% endblock %}

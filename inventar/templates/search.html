@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+		<h1>{% trans "searching for" %}: {{ term }}</h1>
+
+		{% if results %}
+		<table>
+			<tr>
+				<th>{% trans "Name" %}</th>
+				<th>{% trans "Codes" %}</th>
+			</tr>
+		{% for result in results %}
+			{% cycle 'row1' 'row2' as rowcolor silent %}
+			<tr class="{{ rowcolor }}">
+				{% if result.one_barcode %}
+				<td><a href="{% url item selectedid=result.one_barcode %}">{{ result.name }}</a></td>
+				{% else %}
+				<td>{{ result.name }}</td>
+				{% endif %}
+				<td>{{ result.barcodes }}</td>
+			</tr>
+		{% endfor %}
+		</table>
+		{% else %}
+		{% endif %}
+{% endblock %}

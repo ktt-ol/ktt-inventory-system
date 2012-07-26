@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+		{% if user.is_authenticated %}
+		<h1>{{ name }} <a href="{% url admin:inventory_item_change id %}"><img src="/static/edit.svg" width="20" height="20" alt="[edit]"/></a></h1>
+		{% else %}
+		<h1>{{ name }}</h1>
+		{% endif %}
+
+		<table>
+			<tr class="{% cycle 'row1' 'row2' as rowcolor %}">
+				<th>{% trans "Name" %}</th>
+				<td>{{ name }}</td>
+			</tr>
+
+			<tr class="{% cycle rowcolor %}">
+				<th><img src="/static/barcode.svg" width="32" height="32" title="{% trans "Codes" %}" alt="{% trans "Codes" %}" /></th>
+				<td>{{ codes }}</td>
+			</tr>
+
+			<tr class="{% cycle rowcolor %}">
+				<th><img src="/static/info.svg" width="32" height="32" title="{% trans "Description" %}" alt="{% trans "Description" %}" /></th>
+				<td><pre>{{ description }}</pre></td>
+			</tr>
+
+			{% if image %}
+			<tr class="{% cycle rowcolor %}">
+				<th><img src="/static/image.svg" width="32" height="32" title="{% trans "Image" %}" alt="{% trans "Image" %}" /></th>
+				<td><a href="/uploaded/{{ image }}"><img src="/uploaded/{{ image }}" width="640" alt="{% trans "image from item" %}" /></a></td>
+			</tr>
+			{% endif %}
+
+			<tr class="{% cycle rowcolor %}">
+				<th><img src="/static/used.svg" width="32" height="32" title="{% trans "in use" %}" alt="{% trans "in use" %}" /></th>
+				{% if in_use %}
+				<td><img src="/static/true.svg" width="24" height="24" alt="True" title="True" /></td>
+				{% else %}
+				<td><img src="/static/false.svg" width="24" height="24" alt="False" title="False" /></td>
+				{% endif %}
+			</tr>
+
+			<tr class="{% cycle rowcolor %}">
+				<th><img src="/static/parent.svg" width="32" height="32" title="{% trans "Parent" %}" alt="{% trans "Parent" %}" /></th>
+				<td>
+					{% for p in parentpath %}
+					{% if p.one_barcode %}
+					<ul class="path"><li><a href="{% url item selectedid=p.one_barcode %}">{{ p.name }} [{{ p.barcodes }}]</a>
+					{% else %}
+					<ul class="path"><li>{{ p.name }} [{{ p.barcodes }}]
+					{% endif %}
+					{% endfor %}
+					{% for p in parentpath %}
+					</li></ul>
+					{% endfor %}
+				</td>
+			</tr>
+
+			{% if temporary_parent %}
+			<tr class="{% cycle rowcolor %}">
+				<th><img src="/static/temporary_parent.svg" width="32" height="32" title="{% trans "temporary Parent" %}" alt="{% trans "temporary Parent" %}" /></th>
+				<td>
+					{% for p in temporary_parentpath %}
+					{% if p.one_barcode %}
+					<ul class="path"><li><a href="{% url item selectedid=p.one_barcode %}">{{ p.name }} [{{ p.barcodes }}]</a>
+					{% else %}
+					<ul class="path"><li>{{ p.name }} [{{ p.barcodes }}]
+					{% endif %}
+					{% endfor %}
+					{% for p in temporary_parentpath %}
+					</li></ul>
+					{% endfor %}
+				</td>
+			</tr>
+			{% endif %}
+
+			{% if children %}
+			<tr class="{% cycle rowcolor %}">
+				<th><img src="/static/children.svg" width="32" height="32" title="{% trans "Children" %}" alt="{% trans "Children" %}" /></th>
+				<td>
+					{% if children %}
+					<ul>
+					{% for child in children %}
+						{% if child.one_barcode %}
+						<li><a href="{% url item selectedid=child.one_barcode %}">{{ child.name }} [{{ child.barcodes }}]</a></li>
+						{% else %}
+						<li>{{ child.name }} [{{ child.barcodes }}]</li>
+						{% endif %}
+					{% endfor %}
+					</ul>
+					{% else %}
+					{% trans "No Children defined!" %}
+					{% endif %}
+				</td>
+			</tr>
+			{% endif %}
+
+			<tr class="{% cycle rowcolor %}">
+				<th><img src="/static/tag.svg" width="32" height="32" title="{% trans "Tags" %}" alt="{% trans "Tags" %}" /></th>
+				<td>
+					{% if tags %}
+					<ul>
+					{% for tag in tags %}
+						{% if tag.icon %}
+						<li><img src="/uploaded/{{ tag.icon }}" width="32" height="32" alt="{{ tag.name }}" title="{{ tag.name }}" /></li>
+						{% else %}
+						<li>{{ tag.name }}</li>
+						{% endif %}
+					{% endfor %}
+					</ul>
+					{% else %}
+					{% trans "No Tags defined!" %}
+					{% endif %}
+				</td>
+			</tr>
+
+			{% if owner %}
+			<tr class="{% cycle rowcolor %}">
+				<th><img src="/static/owner.svg" width="32" height="32" title="{% trans "Owner" %}" alt="{% trans "Owner" %}" /></th>
+				<td>{{ owner }}</td>
+			</tr>
+			{% endif %}
+		</table>
+{% endblock %}
