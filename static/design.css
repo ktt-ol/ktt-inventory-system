@@ -1,0 +1,87 @@
+.row1 {
+	background-color: #DDD;
+}
+
+.row2 {
+	background-color: #CCC;
+}
+
+#itemsearch input {
+	background: url(search.svg) no-repeat scroll 0px 0px;
+	background-size: contain;
+	background-color: white;
+	padding-left: 30px;
+	font-size:  20px;
+}
+
+#itemchooser input {
+	background: url(barcode.svg) no-repeat scroll 0px 0px;
+	background-size: contain;
+	background-color: white;
+	padding-left: 30px;
+	font-size:  20px;
+}
+
+html, body {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	background-color: #eee;
+}
+
+body {
+	height: 100%;
+}
+
+.header {
+	text-align: center;
+	height: 40px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.header h1 {
+	padding: 0px;
+	margin: 0px;
+	font-size: 30px;
+}
+
+.body {
+	height: auto;
+	position: absolute;
+	bottom: 0; top: 0; left: 0; right: 0;
+	margin-top: 40px;
+	border-top: 1px solid black;
+}
+
+.menu {
+	float: left;
+	padding-right: 5px;
+}
+
+.menu ul {
+	padding-left: 5px;
+}
+
+.menu li {
+	list-style: none;
+	display: block;
+	float: none;
+	position: relative;
+}
+
+.menu li a {
+	color: blue;
+	text-decoration: none;
+}
+
+.content {
+	border-left: 1px solid black;
+	padding-left: 5px;
+	overflow: auto;
+	height: 100%;
+}
+
+.path {
+	list-style-type: square;
+}
