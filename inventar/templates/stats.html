@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+	<h2>Statistics:</h2>
+
+	<ul>
+		<li>Number of codes: {{ number_of_codes }}
+		<li>Number of items: {{ number_of_items }}
+			<ul>
+				<li>with parent: {{ number_of_items_with_parent }}
+				<li>without parent: {{ number_of_items_without_parent }}
+			</ul>
+	</ul>
+
+	Work in Progress...
+{% endblock %}

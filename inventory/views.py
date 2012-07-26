@@ -71,3 +71,11 @@ def graph(request):
 	result['Content-Type'] = "text/plain; charset=utf-8"
 
 	return result
+
+def stats(request):
+	return render_to_response('stats.html', {
+		"number_of_codes": models.Barcode.objects.count(),
+		"number_of_items": models.Item.objects.count(),
+		"number_of_items_with_parent": models.Item.objects.filter(parent__isnull=False).count(),
+		"number_of_items_without_parent": models.Item.objects.filter(parent__isnull=True).count(),
+	})
