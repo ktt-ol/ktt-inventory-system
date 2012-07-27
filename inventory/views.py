@@ -78,4 +78,5 @@ def stats(request):
 		"number_of_items": models.Item.objects.count(),
 		"number_of_items_with_parent": models.Item.objects.filter(parent__isnull=False).count(),
 		"number_of_items_without_parent": models.Item.objects.filter(parent__isnull=True).count(),
+		"max_barcodes_item": models.Item.objects.raw('SELECT inventory_item.*, COUNT(inventory_barcode.item_id) AS number_of_attached_barcodes FROM inventory_item INNER JOIN inventory_barcode ON inventory_barcode.item_id = inventory_item.id GROUP BY inventory_barcode.item_id ORDER BY COUNT(inventory_barcode.item_id) DESC LIMIT 1;')[0],
 	})
