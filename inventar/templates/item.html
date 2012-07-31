@@ -24,6 +24,11 @@
 				<td><pre>{{ description }}</pre></td>
 			</tr>
 
+			<tr class="{% cycle rowcolor %}">
+				<th><img src="/static/note.svg" width="32" height="32" title="{% trans "Note" %}" alt="{% trans "Note" %}" /></th>
+				<td><pre>{{ note }}</pre></td>
+			</tr>
+
 			{% if image %}
 			<tr class="{% cycle rowcolor %}">
 				<th><img src="/static/image.svg" width="32" height="32" title="{% trans "Image" %}" alt="{% trans "Image" %}" /></th>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100"
+   height="100.0011"
+   id="svg3905"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="note.svg">
+  <defs
+     id="defs3907" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="-28.24237"
+     inkscape:cy="-1.027259"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1280"
+     inkscape:window-height="754"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:snap-nodes="true"
+     inkscape:snap-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3783"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata3910">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Alex Hartmann</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
+        <dc:description>www.alexhartmann.net</dc:description>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-sa/3.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-63.772761,-91.391883)">
+    <g
+       transform="matrix(0.02241494,-0.00600606,0.00600606,0.02241494,391.94426,448.30452)"
+       id="g21342"
+       inkscape:export-filename="/Users/Admin/Downloads/notebook.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"
+       style="stroke:#000000;stroke-opacity:1">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:106.24362946;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m -8865.2777,-18044.243 2462.9632,659.949 c 51.5053,13.801 70.1443,46.088 56.3441,97.591 l -996.7978,3720.101 c -13.8027,51.512 -46.0864,70.144 -97.591,56.344 l -2462.9632,-659.949 c -51.5107,-13.802 -70.1444,-46.088 -56.3442,-97.591 l 996.7979,-3720.101 c 13.8005,-51.504 46.0799,-70.146 97.591,-56.344 z"
+         id="path21304"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="sssssssss"
+         inkscape:export-filename="/home/alex/Dropbox/Arcomem Files/Arcomem Video/arcomem_storyboard_draft.png"
+         inkscape:export-xdpi="71.998093"
+         inkscape:export-ydpi="71.998093" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:106.24362946;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m -8788.3101,-18023.619 2385.9956,639.325 c 51.5047,13.8 70.1445,46.088 56.3441,97.591 l -955.551,3566.166 c -13.8004,51.504 -46.0857,70.145 -97.591,56.344 l -2385.9956,-639.326 c -51.5042,-13.8 -70.1441,-46.087 -56.3441,-97.591 l 955.551,-3566.165 c 13.8004,-51.504 46.0872,-70.145 97.591,-56.344 z"
+         id="rect21306"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="scsssscss" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:8.0300169;stroke-opacity:1"
+         id="rect21308"
+         width="291.95316"
+         height="240.2146"
+         x="-13017.252"
+         y="-14805.872"
+         ry="110.96682"
+         inkscape:export-filename="/home/alex/Dropbox/Arcomem Files/Arcomem Video/arcomem_storyboard_draft.png"
+         inkscape:export-xdpi="71.998093"
+         inkscape:export-ydpi="71.998093"
+         transform="matrix(0.96592583,0.25881905,-0.25881905,0.96592583,0,0)" />
+      <rect
+         ry="110.96682"
+         y="-14805.872"
+         x="-12546.887"
+         height="240.2146"
+         width="291.95316"
+         id="rect21310"
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:8.0300169;stroke-opacity:1"
+         inkscape:export-filename="/home/alex/Dropbox/Arcomem Files/Arcomem Video/arcomem_storyboard_draft.png"
+         inkscape:export-xdpi="71.998093"
+         inkscape:export-ydpi="71.998093"
+         transform="matrix(0.96592583,0.25881905,-0.25881905,0.96592583,0,0)" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:8.0300169;stroke-opacity:1"
+         id="rect21312"
+         width="291.95316"
+         height="240.2146"
+         x="-12076.521"
+         y="-14805.872"
+         ry="110.96682"
+         inkscape:export-filename="/home/alex/Dropbox/Arcomem Files/Arcomem Video/arcomem_storyboard_draft.png"
+         inkscape:export-xdpi="71.998093"
+         inkscape:export-ydpi="71.998093"
+         transform="matrix(0.96592583,0.25881905,-0.25881905,0.96592583,0,0)" />
+      <rect
+         ry="110.96682"
+         y="-14805.872"
+         x="-11584.514"
+         height="240.2146"
+         width="291.95316"
+         id="rect21314"
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:8.0300169;stroke-opacity:1"
+         inkscape:export-filename="/home/alex/Dropbox/Arcomem Files/Arcomem Video/arcomem_storyboard_draft.png"
+         inkscape:export-xdpi="71.998093"
+         inkscape:export-ydpi="71.998093"
+         transform="matrix(0.96592583,0.25881905,-0.25881905,0.96592583,0,0)" />
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:8.0300169;stroke-opacity:1"
+         id="rect21316"
+         width="291.95316"
+         height="240.2146"
+         x="-11114.14"
+         y="-14805.872"
+         ry="110.96682"
+         inkscape:export-filename="/home/alex/Dropbox/Arcomem Files/Arcomem Video/arcomem_storyboard_draft.png"
+         inkscape:export-xdpi="71.998093"
+         inkscape:export-ydpi="71.998093"
+         transform="matrix(0.96592583,0.25881905,-0.25881905,0.96592583,0,0)" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:94.07485962;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m -7792.252,-17760.26 c 51.5127,-94.208 108.9358,-164.504 151.2532,-160.672 3.6536,0.32 7.2832,0.96 10.576,2.664 91.4702,47.616 102.1574,213.599 27.5432,399.847 -26.676,66.56 -61.7111,132.176 -113.1918,194.575"
+         id="path21318"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-filename="/home/alex/Dropbox/Arcomem Files/Arcomem Video/arcomem_storyboard_draft.png"
+         inkscape:export-xdpi="71.998093"
+         inkscape:export-ydpi="71.998093" />
+      <path
+         sodipodi:nodetypes="csssc"
+         inkscape:connector-curvature="0"
+         id="path21320"
+         d="m -7327.8035,-17635.813 c 51.5046,-94.207 108.9269,-164.503 151.2452,-160.679 3.6456,0.32 7.2912,0.96 10.5752,2.664 91.4701,47.624 102.1821,213.607 27.5351,399.855 -26.6679,66.551 -61.7023,132.175 -113.1829,194.567"
+         style="fill:none;stroke:#000000;stroke-width:94.07485962;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         inkscape:export-filename="/home/alex/Dropbox/Arcomem Files/Arcomem Video/arcomem_storyboard_draft.png"
+         inkscape:export-xdpi="71.998093"
+         inkscape:export-ydpi="71.998093" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:94.07485962;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m -6873.4655,-17514.069 c 51.5127,-94.216 108.9269,-164.504 151.2452,-160.68 3.6536,0.32 7.3072,0.96 10.6,2.672 91.4702,47.616 102.1574,213.6 27.5183,399.839 -26.6671,66.56 -61.7102,132.176 -113.1829,194.576"
+         id="path21322"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-filename="/home/alex/Dropbox/Arcomem Files/Arcomem Video/arcomem_storyboard_draft.png"
+         inkscape:export-xdpi="71.998093"
+         inkscape:export-ydpi="71.998093" />
+      <path
+         sodipodi:nodetypes="csssc"
+         inkscape:connector-curvature="0"
+         id="path21324"
+         d="m -8246.454,-17882.004 c 51.5094,-94.208 108.9405,-164.496 151.2428,-160.68 3.6456,0.32 7.2992,0.968 10.5912,2.672 91.4781,47.624 102.1581,213.6 27.5351,399.847 -26.6759,66.56 -61.727,132.176 -113.1989,194.568"
+         style="fill:none;stroke:#000000;stroke-width:94.07485962;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         inkscape:export-filename="/home/alex/Dropbox/Arcomem Files/Arcomem Video/arcomem_storyboard_draft.png"
+         inkscape:export-xdpi="71.998093"
+         inkscape:export-ydpi="71.998093" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:94.07485962;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m -8699.6777,-18003.444 c 51.5039,-94.216 108.9277,-164.511 151.2396,-160.687 3.656,0.32 7.304,0.968 10.584,2.672 91.4798,47.631 102.1757,213.599 27.5359,399.847 -26.6719,66.559 -61.7118,132.175 -113.1917,194.575"
+         id="path21326"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="csssc"
+         inkscape:export-filename="/home/alex/Dropbox/Arcomem Files/Arcomem Video/arcomem_storyboard_draft.png"
+         inkscape:export-xdpi="71.998093"
+         inkscape:export-ydpi="71.998093" />
+    </g>
+  </g>
+</svg>

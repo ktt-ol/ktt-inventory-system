@@ -44,6 +44,7 @@ def item(request, selectedid):
 		"name": p.item.name,
 		"codes": p.item.barcodes(),
 		"description": p.item.description,
+		"note": p.item.note,
 		"in_use": p.item.inUse,
 		"parent": p.item.parent,
 		"temporary_parent": p.item.temp_parent,
