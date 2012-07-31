@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-27 00:26+0200\n"
+"POT-Creation-Date: 2012-07-31 21:01+0200\n"
 "PO-Revision-Date: 2012-06-20 22:12+0200\n"
 "Last-Translator: Sebastian Reichel <sre@ring0.de>\n"
 "Language-Team: German\n"
@@ -32,15 +32,19 @@ msgstr "Startseite"
 msgid "Admin Area"
 msgstr "Admin Bereich"
 
-#: inventar/templates/base.html:19
+#: inventar/templates/base.html:18
+msgid "Statistics"
+msgstr "Statistiken"
+
+#: inventar/templates/base.html:20
 msgid "Search Item"
 msgstr "Gegenstand suchen"
 
-#: inventar/templates/base.html:21
+#: inventar/templates/base.html:22
 msgid "Get Item by ID"
 msgstr "Suche Gegenstand per Barcode"
 
-#: inventar/templates/base.html:22
+#: inventar/templates/base.html:23
 msgid "Search Item by Name and Description"
 msgstr "Suche Gegenstand per Name/Beschreibung"
 
@@ -56,43 +60,47 @@ msgstr "Barcodes"
 msgid "Description"
 msgstr "Beschreibung"
 
-#: inventar/templates/item.html:29
+#: inventar/templates/item.html:28
+msgid "Note"
+msgstr "Notiz"
+
+#: inventar/templates/item.html:34
 msgid "Image"
 msgstr "Bild"
 
-#: inventar/templates/item.html:30
+#: inventar/templates/item.html:35
 msgid "image from item"
 msgstr "Bild vom Gegenstand"
 
-#: inventar/templates/item.html:35 inventory/models.py:69
+#: inventar/templates/item.html:40 inventory/models.py:69
 msgid "in use"
 msgstr "in Benutzung"
 
-#: inventar/templates/item.html:44
+#: inventar/templates/item.html:49
 msgid "Parent"
 msgstr "Container"
 
-#: inventar/templates/item.html:61
+#: inventar/templates/item.html:66
 msgid "temporary Parent"
 msgstr "temporärer Container"
 
-#: inventar/templates/item.html:79
+#: inventar/templates/item.html:84
 msgid "Children"
 msgstr "Kinder"
 
-#: inventar/templates/item.html:92
+#: inventar/templates/item.html:97
 msgid "No Children defined!"
 msgstr "Keine Kinder definiert!"
 
-#: inventar/templates/item.html:99
+#: inventar/templates/item.html:104
 msgid "Tags"
 msgstr "Tags"
 
-#: inventar/templates/item.html:112
+#: inventar/templates/item.html:117
 msgid "No Tags defined!"
 msgstr "Keine Tags definiert!"
 
-#: inventar/templates/item.html:119
+#: inventar/templates/item.html:124
 msgid "Owner"
 msgstr "Besitzer"
 
