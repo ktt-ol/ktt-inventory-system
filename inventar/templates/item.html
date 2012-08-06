@@ -119,6 +119,13 @@
 				</td>
 			</tr>
 
+			{% if supplier %}
+			<tr class="{% cycle rowcolor %}">
+				<th><img src="/static/truck.svg" width="32" height="32" title="{% trans "Supplier" %}" alt="{% trans "Supplier" %}" /></th>
+				<td>{{ supplier }}</td>
+			</tr>
+			{% endif %}
+
 			{% if owner %}
 			<tr class="{% cycle rowcolor %}">
 				<th><img src="/static/owner.svg" width="32" height="32" title="{% trans "Owner" %}" alt="{% trans "Owner" %}" /></th>
