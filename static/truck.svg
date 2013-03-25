@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="100"
+   height="100"
+   viewBox="0 0 100 100"
+   enable-background="new 0 0 100 51.086"
+   xml:space="preserve"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="truck.svg"><metadata
+   id="metadata17"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs15" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="865"
+   inkscape:window-height="610"
+   id="namedview13"
+   showgrid="false"
+   inkscape:zoom="2.94"
+   inkscape:cx="50"
+   inkscape:cy="53.857697"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<circle
+   cx="13.955"
+   cy="42.837002"
+   r="8.2489996"
+   id="circle3"
+   sodipodi:cx="13.955"
+   sodipodi:cy="42.837002"
+   sodipodi:rx="8.2489996"
+   sodipodi:ry="8.2489996"
+   transform="translate(0,22.914003)" />
+<circle
+   cx="76.521004"
+   cy="42.837002"
+   r="8.2489996"
+   id="circle5"
+   sodipodi:cx="76.521004"
+   sodipodi:cy="42.837002"
+   sodipodi:rx="8.2489996"
+   sodipodi:ry="8.2489996"
+   transform="translate(0,22.914003)" />
+<rect
+   x="32.362999"
+   width="67.637001"
+   height="32.321999"
+   id="rect7"
+   y="22.914001" />
+<path
+   d="M 70.126,57.501003 H 28.073 v -26.588 l -21.635,1.647 c 0,0 -4.745,11.746 -6.438,15.884 v 11.202 4.021 c 0,1.151 0.933,2.084 2.083,2.084 h 1.432 c 0,-5.767 4.675,-10.44 10.44,-10.44 5.767,0 10.44,4.674 10.44,10.44 h 41.686 c 0,-3.357 1.585,-6.34 4.045,-8.25 z m -50.393,-10.906 -16.653,2.094 4.81,-12.491 11.844,-0.903 v 11.3 z"
+   id="path9"
+   inkscape:connector-curvature="0" />
+<path
+   d="M 99.944,57.501003 H 82.917 c 2.46,1.91 4.045,4.894 4.045,8.25 h 2.437 4.322 l 6.244,-2.211 -0.021,-6.039 z"
+   id="path11"
+   inkscape:connector-curvature="0" />
+</svg>
