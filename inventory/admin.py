@@ -40,7 +40,8 @@ class BarcodeAdmin(admin.ModelAdmin):
 	search_fields = ['code',]
 
 class EliminationAdmin(admin.ModelAdmin):
-	filter_vertical = ('item',)
+	#filter_vertical = ('item',)
+	pass
 
 admin.site.register(models.Item, ItemAdmin)
 admin.site.register(models.Owner)
