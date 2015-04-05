@@ -19,7 +19,7 @@
 					<li><br></li>
 					<li>{% trans "Search Item" %}:
 						<ul>
-					<li><form action="?" target="_self" id="itemchooser" onsubmit="location.assign('/item/'+document.forms['itemchooser']['id'].value+'/'); return false;"><input maxlength="4" name="id" type="text" title="{% trans "Get Item by ID" %}"/></form></li>
+					<li><form action="?" target="_self" id="itemchooser" onsubmit="location.assign('/item/'+document.forms['itemchooser']['id'].value+'/'); return false;"><input maxlength="5" name="id" type="text" title="{% trans "Get Item by ID" %}"/></form></li>
 					<li><form action="?" target="_self" id="itemsearch" onsubmit="location.assign('/search/'+document.forms['itemsearch']['term'].value+'/'); return false;"><input name="term" type="text" title="{% trans "Search Item by Name and Description" %}"/></form></li>
 						</ul>
 					</li>
