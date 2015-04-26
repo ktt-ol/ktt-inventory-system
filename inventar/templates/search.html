@@ -14,7 +14,7 @@
 			{% cycle 'row1' 'row2' as rowcolor silent %}
 			<tr class="{{ rowcolor }}">
 				{% if result.one_barcode %}
-				<td><a href="{% url item selectedid=result.one_barcode %}">{{ result.name }}</a></td>
+				<td><a href="{% url "item" selectedid=result.one_barcode %}">{{ result.name }}</a></td>
 				{% else %}
 				<td>{{ result.name }}</td>
 				{% endif %}
