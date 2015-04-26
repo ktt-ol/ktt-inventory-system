@@ -13,6 +13,8 @@
 # PERFORMANCE OF THIS SOFTWARE.
 
 from django.conf.urls import patterns, include, url
+from django.conf.urls.static import static
+from django.conf import settings
 
 from django.contrib import admin
 admin.autodiscover()
@@ -26,7 +28,7 @@ from inventory.views import stats
 urlpatterns = patterns('',
     url(r'^$', home, name='home'),
 
-    (r'^openid/', include('django_openid_auth.urls')),
+    #(r'^openid/', include('django_openid_auth.urls')),
 
     url(r'^item/(?P<selectedid>[0-9A-Za-z]{4})/$', item, name='item'),
     url(r'^search/(?P<term>[^/]+)/$', search, name='search'),
@@ -34,4 +36,4 @@ urlpatterns = patterns('',
     url(r'^stats/$', stats, name='stats'),
 
     url(r'^admin/', include(admin.site.urls)),
-)
+) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
