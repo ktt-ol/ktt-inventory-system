@@ -34,6 +34,8 @@ class ItemAdmin(admin.ModelAdmin):
 		filters.HasBarcode,
 		'decommissioned',
 		'tag',
+		'permanentLoan',
+		'owner',
 	)
 	list_display = ('name','category','inUse','parent','barcodes')
 	ordering = ['-id',]
