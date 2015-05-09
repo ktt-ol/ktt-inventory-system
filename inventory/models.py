@@ -98,17 +98,6 @@ class Item(models.Model):
 			return true
 		return false
 
-	def add_shelf(self, code):
-
-		self.name = 'Regalborte'
-		self.description = 'Borte im Hochregal \n Reihe: ' + code[1] + 'Regal: ' + code[2]
-		self.business_area = BusinessArea.objects.get(name='ideell')
-		self.category = Category.objects.get(name='Inventar')
-		self.parent = Barcode.objects.get(code='H0000')
-		self.inUse = 'X'
-		self.tag = Tag.objects.get(name='Regale & Storage')
-		self.save()
-
 	def __unicode__(self):
 		return _(u"%(name)s (codes: %(barcodes)s)") % {'name': self.name, 'barcodes': self.barcodes()}
 
