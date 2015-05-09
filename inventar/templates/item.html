@@ -3,7 +3,7 @@
 
 {% block content %}
 		{% if user.is_authenticated %}
-		<h1>{{ name }} <a href="{% url admin:inventory_item_change id %}"><img src="/static/edit.svg" width="20" height="20" alt="[edit]"/></a></h1>
+		<h1>{{ name }} <a href="{% url "admin:inventory_item_change" id %}"><img src="/static/edit.svg" width="20" height="20" alt="[edit]"/></a></h1>
 		{% else %}
 		<h1>{{ name }}</h1>
 		{% endif %}
@@ -52,7 +52,7 @@
 				<td>
 					{% for p in parentpath %}
 					{% if p.one_barcode %}
-					<ul class="path"><li><a href="{% url item selectedid=p.one_barcode %}">{{ p.name }} [{{ p.barcodes }}]</a>
+					<ul class="path"><li><a href="{% url "item selectedid=p.one_barcode" %}">{{ p.name }} [{{ p.barcodes }}]</a>
 					{% else %}
 					<ul class="path"><li>{{ p.name }} [{{ p.barcodes }}]
 					{% endif %}
@@ -69,7 +69,7 @@
 				<td>
 					{% for p in temporary_parentpath %}
 					{% if p.one_barcode %}
-					<ul class="path"><li><a href="{% url item selectedid=p.one_barcode %}">{{ p.name }} [{{ p.barcodes }}]</a>
+					<ul class="path"><li><a href="{% url "item selectedid=p.one_barcode" %}">{{ p.name }} [{{ p.barcodes }}]</a>
 					{% else %}
 					<ul class="path"><li>{{ p.name }} [{{ p.barcodes }}]
 					{% endif %}

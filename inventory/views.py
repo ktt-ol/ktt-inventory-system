@@ -1,13 +1,20 @@
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Q
 import models
 from django.core.mail import mail_admins
+from forms import UploadFileForm
+from django.core.exceptions import ObjectDoesNotExist
+from models import Barcode
+
+
 
 def home(request):
 	return render_to_response('home.html')
+
 
 def item(request, selectedid):
 	p = get_object_or_404(models.Barcode, pk=selectedid.upper())
@@ -58,6 +65,7 @@ def item(request, selectedid):
 	}
 	return render_to_response('item.html', parameters)
 
+
 def search(request, term):
 	results = models.Item.objects.filter(Q(name__contains = term) | Q(description__contains = term))
 
@@ -66,6 +74,7 @@ def search(request, term):
 		"results": results
 	})
 
+
 def graph(request):
 	items = models.Item.objects.all()
 
@@ -73,6 +82,60 @@ def graph(request):
 	result['Content-Type'] = "text/plain; charset=utf-8"
 
 	return result
+
+
+def upload(request):
+	#if request.method == 'POST':
+	form = UploadFileForm(request.POST, request.FILES)
+	if form.is_valid():
+		codefile = request.FILES['file']
+		data = codefile.read().splitlines()
+
+		if request.POST['type'] == '1':
+			parent = ''
+			for code in data:
+				if code != 'NEWPARENT':
+					if parent == '':
+						p = get_object_or_404(models.Barcode, pk=code.upper())
+						parent = code
+					else:
+						i = get_object_or_404(models.Barcode, pk=code.upper())
+						i.item.parent = p.item
+						i.item.save()
+				else:
+					parent = ''
+		elif request.POST['type'] == '2':
+			print('Regal')
+			index = 0
+			error = 0
+			business_area = models.BusinessArea.objects.get(name='ideell')
+			category = models.Category.objects.get(name='Inventar')
+			parent = models.Barcode.objects.get(code='H0000')
+			tag = models.Tag.objects.get(name='Regale & Storage')
+
+			for code in data:
+				if code[0] == 'H' and len(code) == 5:
+					try:
+						b = Barcode.objects.get(code=code.upper())
+						error += 1
+						data[index] = code + ' existiert bereits'
+					except ObjectDoesNotExist:
+						print('Yay!')
+						description = 'Borte im Hochregal \nReihe: ' + code[1] + '\nRegal: ' + code[2]
+						i = models.Item(name='Regalborte', description=description, business_area=business_area, category=category, parent=parent.item)
+						i.save()
+						barcode = Barcode(code=code, item=i)
+						barcode.save()
+					print(i)
+				else:
+					data[index] = code + ' ist nicht im richtigen Format'
+					error += 1
+				index += 1
+		return render(request, 'upload.html', {'form': form, 'data': data})
+	else:
+		form = UploadFileForm()
+	return render(request, 'upload.html', {'form': form})
+
 
 def stats(request):
 	return render_to_response('stats.html', {
