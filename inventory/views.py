@@ -87,7 +87,7 @@ def graph(request):
 def upload(request):
 	#if request.method == 'POST':
 	form = UploadFileForm(request.POST, request.FILES)
-	if form.is_valid():
+	if form.is_valid() and request.user.is_authenticated:
 		codefile = request.FILES['file']
 		data = codefile.read().splitlines()
 
