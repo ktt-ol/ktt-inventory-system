@@ -119,7 +119,6 @@ def upload(request):
 				else:
 					parent = ''
 		elif request.POST['type'] == '2':
-			print('Regal')
 			index = 0
 			error = 0
 			business_area = models.BusinessArea.objects.get(name='ideell')
@@ -134,13 +133,11 @@ def upload(request):
 						error += 1
 						data[index] = code + ' existiert bereits'
 					except ObjectDoesNotExist:
-						print('Yay!')
 						description = 'Borte im Hochregal \nReihe: ' + code[1] + '\nRegal: ' + code[2]
 						i = models.Item(name='Regalborte', description=description, business_area=business_area, category=category, parent=parent.item)
 						i.save()
 						barcode = Barcode(code=code, item=i)
 						barcode.save()
-					print(i)
 				else:
 					data[index] = code + ' ist nicht im richtigen Format'
 					error += 1
