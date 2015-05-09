@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+	{% if user.is_authenticated %}
+		<h2>Upload new Parent Tree:</h2>
+
+		<form enctype="multipart/form-data" method="post" action="/upload/">{% csrf_token %}
+			{{form}}
+		<input type="submit" value="Submit" />
+		<ul class="path">
+		{% for code in data %}
+			<li>{{ code }}</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+{% endblock %}
