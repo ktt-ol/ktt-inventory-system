@@ -95,9 +95,9 @@ def upload(request):
 		if request.POST['type'] == '1':
 			parent = ''
 			for code in data:
-				try:
-					b = Barcode.objects.get(code=code.upper())
-					if code != 'NEWPARENT':
+				if code != 'NEWPARENT':
+					try:
+						b = Barcode.objects.get(code=code.upper())
 						if parent == '':
 							p = Barcode.objects.get(code=code.upper())
 							parent = code
@@ -105,11 +105,11 @@ def upload(request):
 							i = Barcode.objects.get(code=code.upper())
 							i.item.parent = p.item
 							i.item.save()
-					else:
-						parent = ''
-				except ObjectDoesNotExist:
-					error += 1
-					data[index] = code + ' existiert nicht'
+					except ObjectDoesNotExist:
+						error += 1
+						data[index] = code + ' existiert nicht'
+				else:
+					parent = ''
 				index += 1
 		elif request.POST['type'] == '2':
 			business_area = models.BusinessArea.objects.get(name='ideell')
