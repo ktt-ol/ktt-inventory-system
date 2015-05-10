@@ -104,23 +104,28 @@ def upload(request):
 	if form.is_valid() and request.user.is_authenticated:
 		codefile = request.FILES['file']
 		data = codefile.read().splitlines()
-
+		index = 0
+		error = 0
 		if request.POST['type'] == '1':
 			parent = ''
 			for code in data:
 				if code != 'NEWPARENT':
-					if parent == '':
-						p = get_object_or_404(models.Barcode, pk=code.upper())
-						parent = code
-					else:
-						i = get_object_or_404(models.Barcode, pk=code.upper())
-						i.item.parent = p.item
-						i.item.save()
+					try:
+						b = Barcode.objects.get(code=code.upper())
+						if parent == '':
+							p = Barcode.objects.get(code=code.upper())
+							parent = code
+						else:
+							i = Barcode.objects.get(code=code.upper())
+							i.item.parent = p.item
+							i.item.save()
+					except ObjectDoesNotExist:
+						error += 1
+						data[index] = code + ' existiert nicht!'
 				else:
 					parent = ''
+				index += 1
 		elif request.POST['type'] == '2':
-			index = 0
-			error = 0
 			business_area = models.BusinessArea.objects.get(name='ideell')
 			category = models.Category.objects.get(name='Inventar')
 			parent = models.Barcode.objects.get(code='H0000')
@@ -133,8 +138,11 @@ def upload(request):
 						error += 1
 						data[index] = code + ' existiert bereits'
 					except ObjectDoesNotExist:
+						name = 'Regalborte ' + code
 						description = 'Borte im Hochregal \nReihe: ' + code[1] + '\nRegal: ' + code[2]
-						i = models.Item(name='Regalborte', description=description, business_area=business_area, category=category, parent=parent.item)
+						i = models.Item(name=name, description=description, business_area=business_area, category=category, parent=parent.item, inUse=True)
+						i.save()
+						i.tag.add(tag)
 						i.save()
 						barcode = Barcode(code=code, item=i)
 						barcode.save()
