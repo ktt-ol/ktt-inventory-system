@@ -107,7 +107,7 @@ def upload(request):
 							i.item.save()
 					except ObjectDoesNotExist:
 						error += 1
-						data[index] = code + ' existiert nicht'
+						data[index] = code + ' existiert nicht!'
 				else:
 					parent = ''
 				index += 1
