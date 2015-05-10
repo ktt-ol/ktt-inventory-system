@@ -115,6 +115,7 @@ def upload(request):
 			business_area = models.BusinessArea.objects.get(name='ideell')
 			category = models.Category.objects.get(name='Inventar')
 			parent = models.Barcode.objects.get(code='H0000')
+			tag = models.Tag.objects.get(name='Regale & Storage')
 
 			for code in data:
 				if code[0] == 'H' and len(code) == 5:
@@ -123,9 +124,11 @@ def upload(request):
 						error += 1
 						data[index] = code + ' existiert bereits'
 					except ObjectDoesNotExist:
-						name = 'Regalborte' + code
+						name = 'Regalborte ' + code
 						description = 'Borte im Hochregal \nReihe: ' + code[1] + '\nRegal: ' + code[2]
-						i = models.Item(name=name, description=description, business_area=business_area, category=category, parent=parent.item)
+						i = models.Item(name=name, description=description, business_area=business_area, category=category, parent=parent.item, inUse=True)
+						i.save()
+						i.tag.add(tag)
 						i.save()
 						barcode = Barcode(code=code, item=i)
 						barcode.save()
