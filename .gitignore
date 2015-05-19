@@ -1,2 +1,5 @@
 *.pyc
 *.mo
+inventar.db
+inventar/settings.py
+.idea/
