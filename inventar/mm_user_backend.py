@@ -20,6 +20,7 @@
 import logging
 import random
 import string
+from django.contrib.auth.backends import ModelBackend
 import requests
 import requests.packages.urllib3
 from requests.packages.urllib3 import PoolManager
@@ -31,7 +32,7 @@ from django.contrib.auth.models import User
 logger = logging.getLogger(__name__)
 
 
-class MoinMoinUserBackend(object):
+class MoinMoinUserBackend(ModelBackend):
     def __init__(self):
         self._check_for("MM_AUTH_PROVIDER_URL")
         self._check_for("MM_AUTH_PROVIDER_PSK")
