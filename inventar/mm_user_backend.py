@@ -52,7 +52,7 @@ class MoinMoinUserBackend(object):
             try:
                 user = User.objects.get(username=username)
             except User.DoesNotExist:
-                logger.info('User "%s" doesn´t exist. Creating a new one.' % username)
+                logger.info('User "%s" doesn\'t exist. Creating a new one.' % username)
                 # Create a new user. Note that we can set password
                 # to anything, because it won't be checked;
                 # But we set it to a safe random string, in case the original backend is switched on
