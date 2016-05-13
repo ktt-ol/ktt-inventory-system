@@ -91,11 +91,15 @@ class MoinMoinUserBackend(ModelBackend):
         if not json:
             json = {}
         url = settings.MM_AUTH_PROVIDER_URL + "?action=authService&do=" + do_type
-        resp = self._session.post(url, headers={
-            "Auth-Token": settings.MM_AUTH_PROVIDER_PSK
-        }, json=json, verify=settings.MM_AUTH_PROVIDER_CA_CERTS)
-        if resp.status_code != 200:
-            raise StandardError("Unexpected response code %d for '%s'. \nServer response was: %s" % (resp.status_code, url, resp.text))
+        try:
+            resp = self._session.post(url, headers={
+                "Auth-Token": settings.MM_AUTH_PROVIDER_PSK
+            }, json=json, verify=settings.MM_AUTH_PROVIDER_CA_CERTS)
+            if resp.status_code != 200:
+                raise StandardError("Unexpected response code %d for '%s'. \nServer response was: %s" % (resp.status_code, url, resp.text))
+        except requests.exceptions.SSLError as e:
+            logger.error("SSLError: %s", e.message)
+            raise e
 
         return resp.json()
 
