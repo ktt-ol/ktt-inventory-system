@@ -32,6 +32,7 @@ from django.contrib.auth.models import User
 logger = logging.getLogger(__name__)
 
 
+
 class MoinMoinUserBackend(ModelBackend):
     def __init__(self):
         self._check_for("MM_AUTH_PROVIDER_URL")
@@ -44,12 +45,15 @@ class MoinMoinUserBackend(ModelBackend):
         self._session.mount("https://", fingerprint_adapter)
 
     def authenticate(self, username=None, password=None):
+        logger.debug('Make auth request...')
         result = self._make_request("loginCheck", {
             "login": username,
             "password": password
         })
+        auth_result = result["result"]
+        logger.debug('Tried to authenticate user "%s". Result is "%s".' % (username, auth_result))
 
-        if result["result"] == "ok":
+        if auth_result == "ok":
             try:
                 user = User.objects.get(username=username)
             except User.DoesNotExist:
@@ -60,8 +64,11 @@ class MoinMoinUserBackend(ModelBackend):
                 user = User(username=username, password=self._make_rnd_pw())
                 user.is_staff = True
                 user.save()
+
+            logger.info('Authenticate succeed, user "%s" logged in.' % username)
             return user
         else:
+            logger.info('Authenticate failed, user "%s" not found.' % username)
             return None
 
     def get_user(self, user_id):
