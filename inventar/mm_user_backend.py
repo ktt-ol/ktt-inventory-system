@@ -37,12 +37,14 @@ class MoinMoinUserBackend(ModelBackend):
     def __init__(self):
         self._check_for("MM_AUTH_PROVIDER_URL")
         self._check_for("MM_AUTH_PROVIDER_PSK")
-        self._check_for("MM_AUTH_PROVIDER_FINGERPRINT")
 
         requests.packages.urllib3.disable_warnings()
         self._session = requests.Session()
-        fingerprint_adapter = _FingerprintAdapter(settings.MM_AUTH_PROVIDER_FINGERPRINT)
-        self._session.mount("https://", fingerprint_adapter)
+
+        if hasattr(settings, "MM_AUTH_PROVIDER_FINGERPRINT"):
+            logger.info("Fingerprint '%s' found. Enable fingerprint check." % settings.MM_AUTH_PROVIDER_FINGERPRINT)
+            fingerprint_adapter = _FingerprintAdapter(settings.MM_AUTH_PROVIDER_FINGERPRINT)
+            self._session.mount("https://", fingerprint_adapter)
 
     def authenticate(self, username=None, password=None):
         logger.debug('Make auth request...')
@@ -79,8 +81,7 @@ class MoinMoinUserBackend(ModelBackend):
 
     @staticmethod
     def _check_for(key):
-        value = getattr(settings, key)
-        if value is None or value == "":
+        if not hasattr(settings, key):
             raise ValueError('No "%s" in config found.' % key)
 
     @staticmethod
