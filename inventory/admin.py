@@ -16,8 +16,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
 from django.forms.widgets import Select
 from django.db.models import ForeignKey
-import filters
-import models
+from inventory import filters
+from inventory import models
 
 class BarcodeInline(admin.TabularInline):
 	model = models.Barcode

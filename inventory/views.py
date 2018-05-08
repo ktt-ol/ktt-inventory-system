@@ -18,11 +18,11 @@ from django.shortcuts import render_to_response
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Q
-import models
+from inventory import models
 from django.core.mail import mail_admins
-from forms import UploadFileForm
+from inventory.forms import UploadFileForm
 from django.core.exceptions import ObjectDoesNotExist
-from models import Barcode
+from inventory.models import Barcode
 
 
 
