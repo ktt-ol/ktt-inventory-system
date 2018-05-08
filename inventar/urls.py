@@ -12,7 +12,7 @@
 # OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
 
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -26,7 +26,7 @@ from inventory.views import graph
 from inventory.views import stats
 from inventory.views import upload
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^$', home, name='home'),
     #(r'^openid/', include('django_openid_auth.urls')),
 
@@ -36,5 +36,5 @@ urlpatterns = patterns('',
     url(r'^stats/$', stats, name='stats'),
     url(r'^upload/$', upload, name='upload'),
 
-    url(r'^admin/', include(admin.site.urls)),
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    url(r'^admin/', include(admin.site.urls))] + \
+    static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
