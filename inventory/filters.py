@@ -14,7 +14,7 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
-import models
+from inventory import models
 
 class HasParent(SimpleListFilter):
 	# Human-readable title which will be displayed in the
