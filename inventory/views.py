@@ -12,22 +12,18 @@
 # OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
 
-from django.shortcuts import get_object_or_404
-from django.utils.translation import ugettext_lazy as _
-from django.shortcuts import render_to_response
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.db.models import Q
-from inventory import models
-from django.core.mail import mail_admins
-from inventory.forms import UploadFileForm
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
+
+from inventory import models
+from inventory.forms import UploadFileForm
 from inventory.models import Barcode
 
 
-
 def home(request):
-	return render_to_response('home.html')
+	return render(request, 'home.html', {})
 
 
 def item(request, selectedid):
@@ -77,13 +73,13 @@ def item(request, selectedid):
 		"owner": p.item.owner,
 
 	}
-	return render_to_response('item.html', parameters)
+	return render(request, 'item.html', parameters)
 
 
 def search(request, term):
 	results = models.Item.objects.filter(Q(name__contains = term) | Q(description__contains = term))
 
-	return render_to_response('search.html', {
+	return render(request, 'search.html', {
 		"term": term,
 		"results": results
 	})
@@ -92,7 +88,7 @@ def search(request, term):
 def graph(request):
 	items = models.Item.objects.all()
 
-	result = render_to_response('graph.txt', {"items": items})
+	result = render(request, 'graph.txt', {"items": items})
 	result['Content-Type'] = "text/plain; charset=utf-8"
 
 	return result
@@ -157,7 +153,7 @@ def upload(request):
 
 
 def stats(request):
-	return render_to_response('stats.html', {
+	return render(request, 'stats.html', {
 		"number_of_codes": models.Barcode.objects.count(),
 		"number_of_items": models.Item.objects.count(),
 		"number_of_items_with_parent": models.Item.objects.filter(parent__isnull=False).count(),

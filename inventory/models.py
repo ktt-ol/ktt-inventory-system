@@ -19,7 +19,7 @@ class Tag(models.Model):
 	name = models.CharField(max_length=64)
 	icon = models.FileField(upload_to="icons/", blank=True, null=True)
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.name
 
 	class Meta:
@@ -30,7 +30,7 @@ class Tag(models.Model):
 class BusinessArea(models.Model):
 	name = models.CharField(max_length=64)
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.name
 
 	class Meta:
@@ -40,7 +40,7 @@ class BusinessArea(models.Model):
 class Category(models.Model):
 	name = models.CharField(max_length=64)
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.name
 
 	class Meta:
@@ -51,7 +51,7 @@ class Category(models.Model):
 class AcquisitionType(models.Model):
 	name = models.CharField(max_length=64)
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.name
 
 	class Meta:
@@ -62,7 +62,7 @@ class Owner(models.Model):
 	firstname = models.CharField(max_length=64)
 	lastname = models.CharField(max_length=64)
 
-	def __unicode__(self):
+	def __str__(self):
 		return "%s %s" % (self.firstname, self.lastname)
 
 	class Meta:
@@ -72,8 +72,8 @@ class Owner(models.Model):
 class Item(models.Model):
 	name = models.TextField()
 	description = models.TextField(blank=True, verbose_name=_('description'))
-	business_area = models.ForeignKey(BusinessArea, verbose_name=_('business area'))
-	category = models.ForeignKey(Category, verbose_name=_('category'))
+	business_area = models.ForeignKey(BusinessArea, verbose_name=_('business area'), on_delete=models.PROTECT)
+	category = models.ForeignKey(Category, verbose_name=_('category'), on_delete=models.PROTECT)
 	decommissioned = models.BooleanField(verbose_name=_('decommissioned'),default=False)
 	targetQuantity = models.IntegerField(blank=True, null=True, verbose_name=_('target quantity'))
 	depreciation = models.BooleanField(verbose_name=_('deprecation'),default=False)
@@ -104,15 +104,15 @@ class Item(models.Model):
 
 	def has_parent(self):
 		if self.parent is not None:
-			return true
-		return false
+			return True
+		return False
 
 	def has_barcode(self):
 		if self.barcodes() != "":
-			return true
-		return false
+			return True
+		return False
 
-	def __unicode__(self):
+	def __str__(self):
 		return _(u"%(name)s (codes: %(barcodes)s)") % {'name': self.name, 'barcodes': self.barcodes()}
 
 	class Meta:
@@ -121,27 +121,27 @@ class Item(models.Model):
 
 class Barcode(models.Model):
 	code = models.CharField(max_length=10,primary_key=True)
-	item = models.ForeignKey(Item)
+	item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
-	def __unicode__(self):
+	def __str__(self):
 		return "%s" % self.code
 
-	def save(self, force_insert=False, force_update=False):
+	def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
 		self.code = self.code.upper().strip()
-		super(Barcode, self).save(force_insert, force_update)
+		super(Barcode, self).save(force_insert, force_update, using, update_fields)
 
 	class Meta:
 		verbose_name = _("barcode")
 		verbose_name_plural = _("barcodes")
 
 class Acquisition(models.Model):
-	item = models.ForeignKey(Item)
+	item = models.ForeignKey(Item, on_delete=models.CASCADE)
 	date = models.DateField()
 	amount = models.IntegerField()
 	unitPrice = models.IntegerField(blank=True, null=True)
-	kind = models.ForeignKey(AcquisitionType)
+	kind = models.ForeignKey(AcquisitionType, on_delete=models.PROTECT)
 
-	def __unicode__(self):
+	def __str__(self):
 		return "%s: %s (%sx)" % (self.date, self.item, self.amount)
 
 	class Meta:
@@ -149,24 +149,24 @@ class Acquisition(models.Model):
 		verbose_name_plural = _("acquisitions")
 
 class Elimination(models.Model):
-	item = models.ForeignKey(Item, verbose_name=_("Item"))
+	item = models.ForeignKey(Item, verbose_name=_("Item"), on_delete=models.CASCADE)
 	date = models.DateField(verbose_name=_("Date"))
 	revenue = models.IntegerField(verbose_name=_("Revenue"), help_text=_("Please use the following format: <em>Money in Cent</em>."))
 	reason = models.TextField(verbose_name=_("Reason"))
 
-	def __unicode__(self):
-		return "%s: %s" % (self.date, self.item.__unicode__())
+	def __str__(self):
+		return "%s: %s" % (self.date, self.item.__str__())
 
 	class Meta:
 		verbose_name = _("elimination")
 		verbose_name_plural = _("eliminations")
 
 class Inventory(models.Model):
-	item = models.ForeignKey(Item)
+	item = models.ForeignKey(Item, on_delete=models.CASCADE)
 	date = models.DateField()
 	amount = models.IntegerField()
 
-	def __unicode__(self):
+	def __str__(self):
 		return "%s: %s (%s)" % (str(self.date), str(self.item), str(self.amount))
 
 	class Meta:

@@ -99,7 +99,7 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'very secret key - CHANGE ME !!!'
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -185,10 +185,9 @@ AUTHENTICATION_BACKENDS = {
    # 'inventar.mm_user_backend.MoinMoinUserBackend' # https://github.com/smilix/moinAuthProvider
 }
 
-#MM_AUTH_PROVIDER_URL = "https://wiki.kreativitaet-trifft-technik.de"
+#MM_AUTH_PROVIDER_URL = "https://wiki.mainframe.io"
 #MM_AUTH_PROVIDER_PSK = ""
-#MM_AUTH_PROVIDER_CA_CERTS = ""
-#MM_AUTH_PROVIDER_FINGERPRINT = ""
+#MM_AUTH_PROVIDER_SSL_VERIFY = True
 
 # remove django.fcgi from links
 FORCE_SCRIPT_NAME = ""

@@ -12,11 +12,11 @@
 # OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
 
-from django.conf.urls import include, url
-from django.conf.urls.static import static
 from django.conf import settings
-
+from django.conf.urls import url
+from django.conf.urls.static import static
 from django.contrib import admin
+
 admin.autodiscover()
 
 from inventory.views import home
@@ -36,5 +36,5 @@ urlpatterns = [
     url(r'^stats/$', stats, name='stats'),
     url(r'^upload/$', upload, name='upload'),
 
-    url(r'^admin/', include(admin.site.urls))] + \
-    static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    url(r'^admin/', admin.site.urls)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

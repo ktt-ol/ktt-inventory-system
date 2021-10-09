@@ -20,17 +20,15 @@
 import logging
 import random
 import string
-from django.contrib.auth.backends import ModelBackend
+from json import JSONDecodeError
+
 import requests
 import requests.packages.urllib3
-from requests.packages.urllib3 import PoolManager
-
 from django.conf import settings
+from django.contrib.auth.backends import ModelBackend, UserModel
 from django.contrib.auth.models import User
 
-
 logger = logging.getLogger(__name__)
-
 
 
 class MoinMoinUserBackend(ModelBackend):
@@ -39,14 +37,9 @@ class MoinMoinUserBackend(ModelBackend):
         self._check_for("MM_AUTH_PROVIDER_PSK")
 
         requests.packages.urllib3.disable_warnings()
-        self._session = requests.Session()
+        # self._session = requests.Session()
 
-        if hasattr(settings, "MM_AUTH_PROVIDER_FINGERPRINT"):
-            logger.info("Fingerprint '%s' found. Enable fingerprint check." % settings.MM_AUTH_PROVIDER_FINGERPRINT)
-            fingerprint_adapter = _FingerprintAdapter(settings.MM_AUTH_PROVIDER_FINGERPRINT)
-            self._session.mount("https://", fingerprint_adapter)
-
-    def authenticate(self, username=None, password=None):
+    def authenticate(self, request, username=None, password=None, **kwargs):
         logger.debug('Make auth request...')
         result = self._make_request("loginCheck", {
             "login": username,
@@ -58,7 +51,7 @@ class MoinMoinUserBackend(ModelBackend):
         if auth_result == "ok":
             try:
                 user = User.objects.get(username=username)
-            except User.DoesNotExist:
+            except UserModel.DoesNotExist:
                 logger.info('User "%s" doesn\'t exist. Creating a new one.' % username)
                 # Create a new user. Note that we can set password
                 # to anything, because it won't be checked;
@@ -76,7 +69,7 @@ class MoinMoinUserBackend(ModelBackend):
     def get_user(self, user_id):
         try:
             return User.objects.get(pk=user_id)
-        except User.DoesNotExist:
+        except UserModel.DoesNotExist:
             return None
 
     @staticmethod
@@ -93,27 +86,20 @@ class MoinMoinUserBackend(ModelBackend):
             json = {}
         url = settings.MM_AUTH_PROVIDER_URL + "?action=authService&do=" + do_type
         try:
-            resp = self._session.post(url, headers={
+            resp = requests.post(url, headers={
                 "Auth-Token": settings.MM_AUTH_PROVIDER_PSK
-            }, json=json, verify=settings.MM_AUTH_PROVIDER_CA_CERTS)
+            },
+             json=json,
+             verify=settings.MM_AUTH_PROVIDER_SSL_VERIFY,
+             allow_redirects=False)
             if resp.status_code != 200:
-                raise StandardError("Unexpected response code %d for '%s'. \nServer response was: %s" % (resp.status_code, url, resp.text))
+                raise Exception(f"Unexpected response code {resp.status_code:d} for '{url}'. \nServer response was: {resp.text}")
         except requests.exceptions.SSLError as e:
-            logger.error("SSLError: %s", e.message)
+            logger.error("SSLError: %s", e)
             raise e
 
-        return resp.json()
-
-
-# from https://github.com/untitaker/vdirsyncer/blob/9d3a9611b2db2e92f933df30dd98c341a50c6211/vdirsyncer/utils/__init__.py#L198
-class _FingerprintAdapter(requests.adapters.HTTPAdapter):
-    def __init__(self, fingerprint=None, **kwargs):
-        self.fingerprint = str(fingerprint)
-        super(_FingerprintAdapter, self).__init__(**kwargs)
-
-    def init_poolmanager(self, connections, maxsize, block=False):
-        self.poolmanager = PoolManager(num_pools=connections,
-                                       maxsize=maxsize,
-                                       block=block,
-                                       assert_fingerprint=self.fingerprint)
-
+        try:
+            return resp.json()
+        except JSONDecodeError as e:
+            logger.error("Can't decode the following JSON:\n%s", resp.text)
+            raise e
