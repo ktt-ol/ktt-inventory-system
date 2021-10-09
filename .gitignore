@@ -3,3 +3,5 @@
 inventar.db
 inventar/settings.py
 .idea/
+venv/
+uploaded/
