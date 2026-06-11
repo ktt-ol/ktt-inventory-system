@@ -1,7 +1,6 @@
 from django.test import TestCase
 
 from inventory.models import (
-    AcquisitionType,
     Barcode,
     BusinessArea,
     Category,
