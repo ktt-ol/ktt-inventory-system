@@ -18,6 +18,12 @@ cd inventory/static/ && ln -s ../../venv/lib/python3.*/site-packages/django/cont
 
 All steps assume that you've activated the venv, e.g. `source venv/bin/activate`.
 
+Create the database tables (first time only):
+
+```shell
+./manage.py migrate
+```
+
 Start the local dev server with
 
 ```shell
