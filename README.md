@@ -30,6 +30,19 @@ Start the local dev server with
 ./manage.py runserver
 ```
 
+## Testing
+
+Run the test suite with:
+
+```shell
+pytest
+```
+
+Tests use pytest-django. A session-scoped baseline populates the
+database once with sample inventory data (`tests/conftest.py`).
+Most tests run against this baseline. Tests that need an empty
+database request the `empty_db` fixture.
+
 ## Server
 
 ```shell
