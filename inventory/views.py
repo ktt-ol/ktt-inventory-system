@@ -13,7 +13,7 @@
 # PERFORMANCE OF THIS SOFTWARE.
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 
@@ -153,11 +153,15 @@ def upload(request):
 
 
 def stats(request):
-	max_barcodes = list(models.Item.objects.raw('SELECT inventory_item.*, COUNT(inventory_barcode.item_id) AS number_of_attached_barcodes FROM inventory_item INNER JOIN inventory_barcode ON inventory_barcode.item_id = inventory_item.id GROUP BY inventory_barcode.item_id ORDER BY COUNT(inventory_barcode.item_id) DESC LIMIT 1;'))
+	max_barcodes_item = models.Item.objects.annotate(
+		num_barcodes=Count('barcode'),
+	).filter(
+		num_barcodes__gt=0,
+	).order_by('-num_barcodes').first()
 	return render(request, 'stats.html', {
 		"number_of_codes": models.Barcode.objects.count(),
 		"number_of_items": models.Item.objects.count(),
 		"number_of_items_with_parent": models.Item.objects.filter(parent__isnull=False).count(),
 		"number_of_items_without_parent": models.Item.objects.filter(parent__isnull=True).count(),
-		"max_barcodes_item": max_barcodes[0] if max_barcodes else None,
+		"max_barcodes_item": max_barcodes_item,
 	})

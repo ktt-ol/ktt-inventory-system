@@ -35,10 +35,9 @@ class StatsViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["number_of_codes"], 3)
         self.assertEqual(response.context["number_of_items"], 2)
-        self.assertEqual(
-            response.context["max_barcodes_item"].name,
-            "Soldering iron",
-        )
+        max_item = response.context["max_barcodes_item"]
+        self.assertEqual(max_item.name, "Soldering iron")
+        self.assertEqual(max_item.num_barcodes, 2)
 
 
 class HomeViewTest(TestCase):
