@@ -11,7 +11,11 @@
 				<li>with parent: {{ number_of_items_with_parent }}</li>
 				<li>without parent: {{ number_of_items_without_parent }}</li>
 			</ul></li>
-		<li>Item with most barcodes: {{ max_barcodes_item.name }} [<b>{{max_barcodes_item.num_barcodes}}</b> Barcodes]</li>
+		{% if max_barcodes_item %}
+		<li>Item with most barcodes: {{ max_barcodes_item.name }} [<b>{{ max_barcodes_item.num_barcodes }}</b> Barcodes]</li>
+		{% else %}
+		<li>Item with most barcodes: &mdash;</li>
+		{% endif %}
 	</ul>
 
 	Work in Progress...
