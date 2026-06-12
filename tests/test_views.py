@@ -1,5 +1,7 @@
 import pytest
 
+from inventory.models import Barcode, BusinessArea, Category, Item
+
 pytestmark = pytest.mark.django_db
 
 
@@ -33,3 +35,39 @@ def test_stats_empty_database(client, empty_db):
     assert response.status_code == 200
     assert response.context["number_of_items"] == 0
     assert response.context["max_barcodes_item"] is None
+
+
+def test_item_description_urls_are_linked(client):
+    area = BusinessArea.objects.first()
+    cat = Category.objects.first()
+    item = Item.objects.create(
+        name="Coffee machine",
+        description="Manual: https://wiki.space.test/coffee",
+        business_area=area,
+        category=cat,
+    )
+    Barcode.objects.create(code="T001", item=item)
+
+    response = client.get("/item/T001/")
+
+    assert response.status_code == 200
+    content = response.content.decode()
+    assert '<a href="https://wiki.space.test/coffee"' in content
+
+
+def test_item_note_urls_are_linked(client):
+    area = BusinessArea.objects.first()
+    cat = Category.objects.first()
+    item = Item.objects.create(
+        name="3D Printer",
+        note="Guide: https://wiki.space.test/3dprint",
+        business_area=area,
+        category=cat,
+    )
+    Barcode.objects.create(code="T002", item=item)
+
+    response = client.get("/item/T002/")
+
+    assert response.status_code == 200
+    content = response.content.decode()
+    assert '<a href="https://wiki.space.test/3dprint"' in content
