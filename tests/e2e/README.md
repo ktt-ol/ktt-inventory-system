@@ -29,8 +29,8 @@ The Playwright Python package depends on `greenlet`, which needs
 `libstdc++`. On NixOS, provide it via `LD_LIBRARY_PATH`:
 
 ```sh
-nix shell nixpkgs#stdenv.cc.cc.lib -c bash -c \
-  'export LD_LIBRARY_PATH=$NIX_CC/lib; uv run pytest -v'
+LD_LIBRARY_PATH="$(nix eval nixpkgs#stdenv.cc.cc.lib.outPath --raw)/lib" \
+  uv run pytest -v
 ```
 
 The `conftest.py` uses system Chromium (`which chromium`)
