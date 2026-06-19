@@ -19,10 +19,11 @@ LOCALE_PATHS = [
 	'inventar/conf/locale'
 ]
 
-ugettext = lambda s: s
+from django.utils.translation import gettext_lazy
+
 LANGUAGES = (
-	('de', ugettext('German')),
-	('en', ugettext('English')),
+	('de', gettext_lazy('German')),
+	('en', gettext_lazy('English')),
 )
 
 DATABASES = {
@@ -56,10 +57,6 @@ SITE_ID = 1
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
-
-# If you set this to False, Django will not format dates, numbers and
-# calendars according to the current locale.
-USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
