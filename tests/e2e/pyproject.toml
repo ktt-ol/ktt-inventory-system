@@ -1,0 +1,13 @@
+[project]
+name = "inventory-e2e-tests"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-playwright>=0.7",
+]
+
+[tool.pytest.ini_options]
+base_url = "http://localhost:8000"
