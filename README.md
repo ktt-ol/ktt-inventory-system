@@ -4,44 +4,53 @@ A simple Django app that tracks our inventory.
 
 ## Setup
 
-1. Create a venv, e.g. 
+Install dependencies with [uv](https://docs.astral.sh/uv/):
 
 ```shell
-apt-get install python3-venv
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-cd inventory/static/ && ln -s ../../venv/lib/python3.*/site-packages/django/contrib/admin/static/admin && cd -
+uv sync
 ```
 
-## Development
+### NixOS
 
-All steps assume that you've activated the venv, e.g. `source venv/bin/activate`.
+On NixOS, pip-installed Python C extensions (like greenlet) cannot
+find system libraries at standard paths. The included `flake.nix`
+provides a devShell that sets `LD_LIBRARY_PATH` for `libstdc++`:
+
+```shell
+nix develop
+```
+
+Then use `uv run` or `uv run bash` as usual inside the shell.
+
+## Development
 
 Create the database tables (first time only):
 
 ```shell
-./manage.py migrate
+uv run python manage.py migrate
 ```
 
-Start the local dev server with
+Start the local dev server with:
 
 ```shell
-./manage.py runserver
+uv run python manage.py runserver
 ```
 
 ## Testing
 
-Run the test suite with:
+Run the unit test suite with:
 
 ```shell
-pytest
+uv run pytest
 ```
 
 Tests use pytest-django. A session-scoped baseline populates the
-database once with sample inventory data (`tests/conftest.py`).
+database once with sample inventory data (`tests/unit/conftest.py`).
 Most tests run against this baseline. Tests that need an empty
 database request the `empty_db` fixture.
+
+E2E tests live in `tests/e2e/` as a separate project — see
+`tests/e2e/README.md`.
 
 ## Configuration
 
