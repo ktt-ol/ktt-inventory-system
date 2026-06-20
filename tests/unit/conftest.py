@@ -30,3 +30,34 @@ def django_db_setup(django_db_setup, django_db_blocker):
 def empty_db(transactional_db):
     """Provide an empty database by flushing all data."""
     call_command("flush", "--no-input", verbosity=0)
+
+
+@pytest.fixture
+def area(db):
+    return BusinessArea.objects.first()
+
+
+@pytest.fixture
+def category(db):
+    return Category.objects.first()
+
+
+@pytest.fixture
+def item(db, area, category):
+    """Item with a barcode."""
+    obj = Item.objects.create(
+        name="Test item",
+        business_area=area,
+        category=category,
+    )
+    Barcode.objects.create(code="T0001", item=obj)
+    return obj
+
+
+@pytest.fixture
+def item_without_barcode(db, area, category):
+    return Item.objects.create(
+        name="Unlabeled item",
+        business_area=area,
+        category=category,
+    )
