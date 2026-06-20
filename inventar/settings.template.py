@@ -200,3 +200,6 @@ FORCE_SCRIPT_NAME = ""
 
 #LOGIN_URL = "/openid/login/"
 LOGIN_REDIRECT_URL = "/"
+
+# Accepted barcode code length range (min, max). Defaults to (4, 6).
+#BARCODE_CODE_LENGTH = (4, 6)
