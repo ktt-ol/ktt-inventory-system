@@ -4,6 +4,20 @@
 	<head>
 		<title>{% block title %}KtT Inventory System{% endblock %}</title>
 		<link rel="stylesheet" href="/static/design.css" type="text/css"  />
+		<script>
+		function searchByCode() {
+			var v = document.forms['itemchooser']['id'].value.trim();
+			if (!v) return false;
+			location.assign('/item/' + v + '/');
+			return false;
+		}
+		function searchByText() {
+			var v = document.forms['itemsearch']['term'].value.trim();
+			if (!v) return false;
+			location.assign('/search/' + v + '/');
+			return false;
+		}
+		</script>
 	</head>
 	<body>
 		<div class="header">
@@ -20,8 +34,8 @@
 					<li><br></li>
 					<li>{% trans "Search Item" %}:
 						<ul>
-					<li><form action="?" target="_self" id="itemchooser" onsubmit="location.assign('/item/'+document.forms['itemchooser']['id'].value+'/'); return false;"><input maxlength="6" name="id" type="text" title="{% trans "Get Item by ID" %}"/></form></li>
-					<li><form action="?" target="_self" id="itemsearch" onsubmit="location.assign('/search/'+document.forms['itemsearch']['term'].value+'/'); return false;"><input name="term" type="text" title="{% trans "Search Item by Name and Description" %}"/></form></li>
+					<li><form action="?" target="_self" id="itemchooser" onsubmit="return searchByCode();"><input maxlength="6" name="id" type="text" title="{% trans "Get Item by ID" %}"/></form></li>
+					<li><form action="?" target="_self" id="itemsearch" onsubmit="return searchByText();"><input name="term" type="text" title="{% trans "Search Item by Name and Description" %}"/></form></li>
 						</ul>
 					</li>
 				</ul>
