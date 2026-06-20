@@ -3,6 +3,8 @@ import shutil
 
 import pytest
 
+from pages import HomePage, ItemPage
+
 
 @pytest.fixture(scope="session")
 def browser_type_launch_args(browser_type_launch_args):
@@ -13,3 +15,13 @@ def browser_type_launch_args(browser_type_launch_args):
     if chromium:
         return {**browser_type_launch_args, "executable_path": chromium}
     return browser_type_launch_args
+
+
+@pytest.fixture
+def home_page(page) -> HomePage:
+    return HomePage(page)
+
+
+@pytest.fixture
+def item_page(page) -> ItemPage:
+    return ItemPage(page)
