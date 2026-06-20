@@ -21,13 +21,13 @@
 
 			<tr class="{% cycle rowcolor %}">
 				<th><img src="/static/info.svg" width="32" height="32" title="{% trans "Description" %}" alt="{% trans "Description" %}" /></th>
-				<td><pre>{{ description }}</pre></td>
+				<td><pre>{{ description|urlize }}</pre></td>
 			</tr>
 
 			{% if note %}
 			<tr class="{% cycle rowcolor %}">
 				<th><img src="/static/note.svg" width="32" height="32" title="{% trans "Note" %}" alt="{% trans "Note" %}" /></th>
-				<td><pre>{{ note }}</pre></td>
+				<td><pre>{{ note|urlize }}</pre></td>
 			</tr>
 			{% endif %}
 
