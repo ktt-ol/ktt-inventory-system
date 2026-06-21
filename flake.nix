@@ -77,6 +77,57 @@
 
         virtualenv = pythonSet.mkVirtualEnv "dev-env"
           workspace.deps.all;
+
+        containerEnv = pythonSet.mkVirtualEnv "container-env" {
+          ktt-inventory-system = [ "prod" ];
+        };
+
+        compiledLocale = pkgs.runCommand "compiled-locale" {
+          nativeBuildInputs = [ pkgs.gettext ];
+        } ''
+          mkdir -p $out/de/LC_MESSAGES
+          msgfmt ${./conf/locale/de/LC_MESSAGES/django.po} \
+            -o $out/de/LC_MESSAGES/django.mo
+        '';
+
+        staticFiles = pkgs.runCommand "collected-static" {
+          nativeBuildInputs = [ containerEnv ];
+        } ''
+          export DJANGO_SETTINGS_MODULE=inventar.settings_container
+          export SECRET_KEY=nix-build-placeholder
+          export STATIC_ROOT=$out
+          export LOCALE_PATH=${compiledLocale}
+          python -m django collectstatic --noinput
+        '';
+
+        nginxConf = pkgs.writeText "nginx.conf" ''
+          daemon off;
+          worker_processes 1;
+          error_log /dev/stderr;
+          pid /tmp/nginx.pid;
+
+          events {
+            worker_connections 64;
+          }
+
+          http {
+            include ${pkgs.nginx}/conf/mime.types;
+            access_log /dev/stdout;
+
+            client_body_temp_path /tmp/client_body;
+
+            gzip on;
+            gzip_types text/css application/javascript
+                       image/svg+xml;
+
+            server {
+              listen 80;
+              listen [::]:80;
+              location /static/ { alias /static/; }
+              location /uploaded/ { alias /uploaded/; }
+            }
+          }
+        '';
       in
       {
         devShells.default = pkgs.mkShell {
@@ -93,6 +144,77 @@
             unset PYTHONPATH
           '';
         };
+
+        packages.container =
+          pkgs.dockerTools.streamLayeredImage {
+            name = "local/ktt-inventory";
+            tag = "latest";
+            contents = [
+              containerEnv
+              pkgs.dockerTools.fakeNss
+              pkgs.cacert
+            ];
+            fakeRootCommands = ''
+              mkdir -p data tmp
+              chmod 1777 tmp
+            '';
+            enableFakechroot = true;
+            config = {
+              Cmd = [
+                "${containerEnv}/bin/gunicorn"
+                "inventar.wsgi:application"
+                "--bind"
+                "0.0.0.0:8000"
+                "--workers"
+                "2"
+              ];
+              Env = [
+                "DJANGO_SETTINGS_MODULE=inventar.settings_container"
+                "LOCALE_PATH=${compiledLocale}"
+                "MEDIA_ROOT=/data/uploaded/"
+                "DATABASE_PATH=/data/inventar.db"
+                "SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+                "PYTHONDONTWRITEBYTECODE=1"
+              ];
+              ExposedPorts = {
+                "8000/tcp" = { };
+              };
+              Volumes = {
+                "/data" = { };
+              };
+            };
+          };
+
+        packages.container-nginx =
+          pkgs.dockerTools.streamLayeredImage {
+            name = "local/ktt-inventory-nginx";
+            tag = "latest";
+            contents = [
+              pkgs.nginx
+              (pkgs.dockerTools.fakeNss.override {
+                extraGroupLines = [ "nogroup:x:65534:" ];
+              })
+            ];
+            extraCommands = ''
+              mkdir -p tmp/client_body
+              mkdir -p var/log/nginx
+              mkdir -p static uploaded
+              cp -r ${staticFiles}/* static/
+            '';
+            config = {
+              Cmd = [
+                "${pkgs.nginx}/bin/nginx"
+                "-c"
+                "${nginxConf}"
+              ];
+              ExposedPorts = {
+                "80/tcp" = { };
+              };
+              Volumes = {
+                "/uploaded" = { };
+              };
+            };
+          };
       }
     );
 }
