@@ -60,8 +60,6 @@
             pypaBuildFlags = (old.pypaBuildFlags or [ ]) ++ [
               "--config-setting=--disable-platform-guessing"
             ];
-            env.NIX_CFLAGS_COMPILE =
-              "-Wno-error=incompatible-pointer-types";
           });
         };
 
