@@ -20,6 +20,9 @@ dev = [
     "pytest~=8.3",
     "pytest-django~=4.9",
 ]
+prod = [
+    "gunicorn~=23.0",
+]
 
 # Supports the Nix build: it builds from source and needs these.
 [tool.uv.extra-build-dependencies]
@@ -36,6 +39,7 @@ pluggy = ["setuptools"]
 pygments = ["hatchling"]
 pytest = ["setuptools"]
 pytest-django = ["setuptools"]
+gunicorn = ["setuptools"]
 requests = ["setuptools"]
 sqlparse = ["hatchling"]
 urllib3 = ["hatchling", "hatch-vcs"]
