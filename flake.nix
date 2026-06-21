@@ -121,8 +121,8 @@
                        image/svg+xml;
 
             server {
-              listen 80;
-              listen [::]:80;
+              listen 8080;
+              listen [::]:8080;
               location /static/ { alias /static/; }
               location /uploaded/ { alias /uploaded/; }
             }
@@ -208,7 +208,7 @@
                 "${nginxConf}"
               ];
               ExposedPorts = {
-                "80/tcp" = { };
+                "8080/tcp" = { };
               };
               Volumes = {
                 "/uploaded" = { };
