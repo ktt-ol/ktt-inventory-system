@@ -52,3 +52,14 @@ def test_item_by_id_renders_when_no_barcode(client, item_without_barcode):
 def test_item_by_id_returns_404_for_missing_item(client):
     response = client.get("/item/id/99999/")
     assert response.status_code == 404
+
+
+def test_parent_without_barcode_shows_no_brackets(client, item, item_without_barcode):
+    item.parent = item_without_barcode
+    item.save()
+
+    response = client.get("/item/T0001/")
+
+    content = response.content.decode()
+    assert "Unlabeled item" in content
+    assert "Unlabeled item []" not in content

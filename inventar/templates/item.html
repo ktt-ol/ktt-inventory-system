@@ -51,7 +51,7 @@
 				<th><img src="/static/parent.svg" width="32" height="32" title="{% trans "Parent" %}" alt="{% trans "Parent" %}" /></th>
 				<td>
 					{% for p in parentpath %}
-					<ul class="path"><li><a href="{{ p.get_absolute_url }}">{{ p.name }} [{{ p.barcodes }}]</a>
+					<ul class="path"><li>{% include "_item_link.html" with item=p %}
 					{% endfor %}
 					{% for p in parentpath %}
 					</li></ul>
@@ -64,7 +64,7 @@
 				<th><img src="/static/temporary_parent.svg" width="32" height="32" title="{% trans "temporary Parent" %}" alt="{% trans "temporary Parent" %}" /></th>
 				<td>
 					{% for p in temporary_parentpath %}
-					<ul class="path"><li><a href="{{ p.get_absolute_url }}">{{ p.name }} [{{ p.barcodes }}]</a>
+					<ul class="path"><li>{% include "_item_link.html" with item=p %}
 					{% endfor %}
 					{% for p in temporary_parentpath %}
 					</li></ul>
@@ -80,7 +80,7 @@
 					{% if children %}
 					<ul>
 					{% for child in children %}
-						<li><a href="{{ child.get_absolute_url }}">{{ child.name }} [{{ child.barcodes }}]</a></li>
+						<li>{% include "_item_link.html" with item=child %}</li>
 					{% endfor %}
 					</ul>
 					{% else %}
