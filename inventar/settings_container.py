@@ -7,8 +7,8 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 
-_origin = os.environ.get("CSRF_TRUSTED_ORIGIN", "")
-CSRF_TRUSTED_ORIGINS = [_origin] if _origin else []
+_origins = os.environ.get("CSRF_TRUSTED_ORIGINS", "")
+CSRF_TRUSTED_ORIGINS = _origins.split(",") if _origins else []
 
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
