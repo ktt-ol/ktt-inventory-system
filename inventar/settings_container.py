@@ -10,6 +10,12 @@ ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 _origins = os.environ.get("CSRF_TRUSTED_ORIGINS", "")
 CSRF_TRUSTED_ORIGINS = _origins.split(",") if _origins else []
 
+_code_length = os.environ.get("BARCODE_CODE_LENGTH", "")
+if _code_length:
+    BARCODE_CODE_LENGTH = tuple(
+        int(part) for part in _code_length.split(",")
+    )
+
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 

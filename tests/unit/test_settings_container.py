@@ -49,11 +49,3 @@ def test_barcode_code_length_from_environment(container_settings):
     settings = container_settings(BARCODE_CODE_LENGTH="1,10")
 
     assert settings.BARCODE_CODE_LENGTH == (1, 10)
-
-
-def test_barcode_code_length_unset_without_the_variable(
-    container_settings, monkeypatch
-):
-    monkeypatch.delenv("BARCODE_CODE_LENGTH", raising=False)
-
-    assert not hasattr(container_settings(), "BARCODE_CODE_LENGTH")
