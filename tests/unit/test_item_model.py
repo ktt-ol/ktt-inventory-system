@@ -1,6 +1,7 @@
 import pytest
 
 from inventory.models import Barcode, Item
+from tests.unit.helpers import barcode_code_length
 
 pytestmark = pytest.mark.django_db
 
@@ -17,7 +18,10 @@ def test_get_absolute_url_with_short_barcode(area, category):
     )
     Barcode.objects.create(code="M01", item=obj)
 
-    assert obj.get_absolute_url() == "/item/M01/"
+    with barcode_code_length(1, 10):
+        url = obj.get_absolute_url()
+
+    assert url == "/item/M01/"
 
 
 def test_get_absolute_url_without_barcode(item_without_barcode):
