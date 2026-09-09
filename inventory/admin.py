@@ -14,8 +14,6 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
-from django.forms.widgets import Select
-from django.db.models import ForeignKey
 from inventory import filters
 from inventory import models
 
@@ -24,10 +22,10 @@ class BarcodeInline(admin.TabularInline):
 	fk_name = "item"
 
 class ItemAdmin(admin.ModelAdmin):
-	formfield_overrides = {
-		ForeignKey: {'widget': Select(attrs = {'class': 'chzn-select'})}
-	}
-
+	autocomplete_fields = [
+		'business_area', 'category', 'parent',
+		'temp_parent', 'owner',
+	]
 	list_per_page = 100
 	list_filter = (
 		filters.HasParent,
@@ -59,13 +57,22 @@ class EliminationAdmin(admin.ModelAdmin):
 	#filter_vertical = ('item',)
 	pass
 
+class BusinessAreaAdmin(admin.ModelAdmin):
+	search_fields = ['name']
+
+class CategoryAdmin(admin.ModelAdmin):
+	search_fields = ['name']
+
+class OwnerAdmin(admin.ModelAdmin):
+	search_fields = ['firstname', 'lastname']
+
 admin.site.register(models.Item, ItemAdmin)
-admin.site.register(models.Owner)
+admin.site.register(models.Owner, OwnerAdmin)
 admin.site.register(models.AcquisitionType)
 admin.site.register(models.Acquisition)
 admin.site.register(models.Elimination, EliminationAdmin)
 admin.site.register(models.Inventory)
 admin.site.register(models.Tag, TagAdmin)
-admin.site.register(models.BusinessArea)
-admin.site.register(models.Category)
+admin.site.register(models.BusinessArea, BusinessAreaAdmin)
+admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.Barcode, BarcodeAdmin)

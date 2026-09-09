@@ -18,11 +18,30 @@ cd inventory/static/ && ln -s ../../venv/lib/python3.*/site-packages/django/cont
 
 All steps assume that you've activated the venv, e.g. `source venv/bin/activate`.
 
+Create the database tables (first time only):
+
+```shell
+./manage.py migrate
+```
+
 Start the local dev server with
 
 ```shell
 ./manage.py runserver
 ```
+
+## Testing
+
+Run the test suite with:
+
+```shell
+pytest
+```
+
+Tests use pytest-django. A session-scoped baseline populates the
+database once with sample inventory data (`tests/conftest.py`).
+Most tests run against this baseline. Tests that need an empty
+database request the `empty_db` fixture.
 
 ## Server
 
