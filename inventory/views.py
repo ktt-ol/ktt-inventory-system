@@ -80,8 +80,9 @@ def item(request, selectedid):
 
 def item_by_id(request, item_id):
 	item_obj = get_object_or_404(models.Item, pk=item_id)
-	if item_obj.has_barcode():
-		return redirect(item_obj.get_absolute_url())
+	barcode_url = item_obj.barcode_url()
+	if barcode_url:
+		return redirect(barcode_url)
 	return _render_item(request, item_obj)
 
 
