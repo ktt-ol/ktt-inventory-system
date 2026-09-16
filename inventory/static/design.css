@@ -1,36 +1,66 @@
+:root {
+	color-scheme: light dark;
+	--bg: #eee;
+	--row1: #DDD;
+	--row2: #CCC;
+	--input-bg: white;
+	--text: #000;
+	--link: blue;
+	--border: black;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #1a1a1a;
+		--row1: #2a2a2a;
+		--row2: #333;
+		--input-bg: #333;
+		--text: #e0e0e0;
+		--link: #6ea8fe;
+		--border: #555;
+	}
+}
+
 .row1 {
-	background-color: #DDD;
+	background-color: var(--row1);
 }
 
 .row2 {
-	background-color: #CCC;
+	background-color: var(--row2);
 }
 
 #itemsearch input {
 	background: url(search.svg) no-repeat scroll 0px 0px;
 	background-size: contain;
-	background-color: white;
+	background-color: var(--input-bg);
 	padding-left: 30px;
 	font-size:  20px;
+	color: var(--text);
 }
 
 #itemchooser input {
 	background: url(barcode.svg) no-repeat scroll 0px 0px;
 	background-size: contain;
-	background-color: white;
+	background-color: var(--input-bg);
 	padding-left: 30px;
 	font-size:  20px;
+	color: var(--text);
 }
 
 html, body {
 	margin: 0px;
 	padding: 0px;
 	height: 100%;
-	background-color: #eee;
+	background-color: var(--bg);
+	color: var(--text);
 }
 
 body {
 	height: 100%;
+}
+
+a {
+	color: var(--link);
 }
 
 .header {
@@ -51,7 +81,7 @@ body {
 	position: absolute;
 	bottom: 0; top: 0; left: 0; right: 0;
 	margin-top: 40px;
-	border-top: 1px solid black;
+	border-top: 1px solid var(--border);
 }
 
 .menu {
@@ -71,12 +101,11 @@ body {
 }
 
 .menu li a {
-	color: blue;
 	text-decoration: none;
 }
 
 .content {
-	border-left: 1px solid black;
+	border-left: 1px solid var(--border);
 	padding-left: 5px;
 	overflow: auto;
 	height: 100%;
@@ -84,4 +113,18 @@ body {
 
 .path {
 	list-style-type: square;
+}
+
+@media (prefers-color-scheme: dark) {
+	.menu img,
+	.content img[src$=".svg"] {
+		filter: invert(1) brightness(0.85);
+	}
+
+	#itemsearch input,
+	#itemchooser input {
+		filter: invert(1) brightness(0.85);
+		background-color: #BBB;
+		color: black;
+	}
 }
