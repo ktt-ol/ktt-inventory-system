@@ -19,3 +19,8 @@ def test_get_absolute_url_with_short_barcode(item_with_short_code):
 def test_get_absolute_url_without_barcode(item_without_barcode):
     pk = item_without_barcode.pk
     assert item_without_barcode.get_absolute_url() == f"/item/id/{pk}/"
+
+
+def test_get_absolute_url_falls_back_when_code_unaddressable(item_with_short_code):
+    pk = item_with_short_code.pk
+    assert item_with_short_code.get_absolute_url() == f"/item/id/{pk}/"

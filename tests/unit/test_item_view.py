@@ -62,6 +62,23 @@ def test_item_by_id_returns_404_for_missing_item(client):
     assert response.status_code == 404
 
 
+def test_item_by_id_renders_when_code_unaddressable(client, item_with_short_code):
+    response = client.get(f"/item/id/{item_with_short_code.pk}/")
+
+    assert response.status_code == 200
+
+
+def test_listing_page_renders_when_child_code_unaddressable(
+    client, item, item_with_short_code
+):
+    item_with_short_code.parent = item
+    item_with_short_code.save()
+
+    response = client.get("/item/T0001/")
+
+    assert response.status_code == 200
+
+
 def test_parent_without_barcode_shows_no_brackets(client, item, item_without_barcode):
     item.parent = item_without_barcode
     item.save()
