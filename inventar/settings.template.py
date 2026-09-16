@@ -1,6 +1,8 @@
 # Django settings for inventar project.
 import os.path
 
+from django.utils.translation import gettext_lazy
+
 DEBUG = True
 
 USE_X_FORWARDED_HOST = True
@@ -18,8 +20,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 LOCALE_PATHS = [
 	'inventar/conf/locale'
 ]
-
-from django.utils.translation import gettext_lazy
 
 LANGUAGES = (
 	('de', gettext_lazy('German')),
