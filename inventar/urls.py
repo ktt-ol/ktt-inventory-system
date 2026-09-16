@@ -13,11 +13,9 @@
 # PERFORMANCE OF THIS SOFTWARE.
 
 from django.conf import settings
-from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
-
-admin.autodiscover()
+from django.urls import path, re_path
 
 from inventory.views import home
 from inventory.views import item
@@ -27,14 +25,11 @@ from inventory.views import stats
 from inventory.views import upload
 
 urlpatterns = [
-    url(r'^$', home, name='home'),
-    #(r'^openid/', include('django_openid_auth.urls')),
-
-    url(r'^item/(?P<selectedid>[0-9A-Za-z]{4,6})/$', item, name='item'),
-    url(r'^search/(?P<term>[^/]+)/$', search, name='search'),
-    url(r'^graph/$', graph, name='graph'),
-    url(r'^stats/$', stats, name='stats'),
-    url(r'^upload/$', upload, name='upload'),
-
-    url(r'^admin/', admin.site.urls)
+    path('', home, name='home'),
+    re_path(r'^item/(?P<selectedid>[0-9A-Za-z]{4,6})/$', item, name='item'),
+    path('search/<str:term>/', search, name='search'),
+    path('graph/', graph, name='graph'),
+    path('stats/', stats, name='stats'),
+    path('upload/', upload, name='upload'),
+    path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
