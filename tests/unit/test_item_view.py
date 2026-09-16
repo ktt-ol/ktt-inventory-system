@@ -77,6 +77,7 @@ def test_listing_page_renders_when_child_code_unaddressable(
     response = client.get("/item/T0001/")
 
     assert response.status_code == 200
+    assert f"/item/id/{item_with_short_code.pk}/" in response.content.decode()
 
 
 def test_parent_without_barcode_shows_no_brackets(client, item, item_without_barcode):
