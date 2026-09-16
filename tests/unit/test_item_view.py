@@ -6,14 +6,7 @@ from tests.unit.helpers import barcode_code_length
 pytestmark = pytest.mark.django_db
 
 
-def test_item_page_reachable_with_short_barcode(client, area, category):
-    item = Item.objects.create(
-        name="SD cards",
-        business_area=area,
-        category=category,
-    )
-    Barcode.objects.create(code="M01", item=item)
-
+def test_item_page_reachable_with_short_barcode(client, item_with_short_code):
     with barcode_code_length(1, 10):
         response = client.get("/item/M01/")
 

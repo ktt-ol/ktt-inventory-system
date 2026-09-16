@@ -61,3 +61,15 @@ def item_without_barcode(db, area, category):
         business_area=area,
         category=category,
     )
+
+
+@pytest.fixture
+def item_with_short_code(db, area, category):
+    """Item whose code is shorter than the default range addresses."""
+    obj = Item.objects.create(
+        name="SD cards",
+        business_area=area,
+        category=category,
+    )
+    Barcode.objects.create(code="M01", item=obj)
+    return obj
