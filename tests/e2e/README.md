@@ -23,16 +23,3 @@ cd tests/e2e
 uv run pytest -v
 ```
 
-## NixOS
-
-The Playwright Python package depends on `greenlet`, which needs
-`libstdc++`. On NixOS, provide it via `LD_LIBRARY_PATH`:
-
-```sh
-LD_LIBRARY_PATH="$(nix eval nixpkgs#stdenv.cc.cc.lib.outPath --raw)/lib" \
-  uv run pytest -v
-```
-
-The `conftest.py` uses system Chromium (`which chromium`)
-automatically, so `playwright install` is not needed when
-Chromium is available via NixOS.
