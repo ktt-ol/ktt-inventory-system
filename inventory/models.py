@@ -12,7 +12,7 @@
 # OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 
 class Tag(models.Model):
@@ -126,9 +126,9 @@ class Barcode(models.Model):
 	def __str__(self):
 		return "%s" % self.code
 
-	def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+	def save(self, **kwargs):
 		self.code = self.code.upper().strip()
-		super(Barcode, self).save(force_insert, force_update, using, update_fields)
+		super().save(**kwargs)
 
 	class Meta:
 		verbose_name = _("barcode")
