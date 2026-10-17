@@ -6,14 +6,7 @@ from tests.unit.helpers import barcode_code_length
 pytestmark = pytest.mark.django_db
 
 
-def test_item_page_reachable_with_short_barcode(client, area, category):
-    item = Item.objects.create(
-        name="SD cards",
-        business_area=area,
-        category=category,
-    )
-    Barcode.objects.create(code="M01", item=item)
-
+def test_item_page_reachable_with_short_barcode(client, item_with_short_code):
     with barcode_code_length(1, 10):
         response = client.get("/item/M01/")
 
@@ -67,6 +60,24 @@ def test_item_by_id_renders_when_no_barcode(client, item_without_barcode):
 def test_item_by_id_returns_404_for_missing_item(client):
     response = client.get("/item/id/99999/")
     assert response.status_code == 404
+
+
+def test_item_by_id_renders_when_code_unaddressable(client, item_with_short_code):
+    response = client.get(f"/item/id/{item_with_short_code.pk}/")
+
+    assert response.status_code == 200
+
+
+def test_listing_page_renders_when_child_code_unaddressable(
+    client, item, item_with_short_code
+):
+    item_with_short_code.parent = item
+    item_with_short_code.save()
+
+    response = client.get("/item/T0001/")
+
+    assert response.status_code == 200
+    assert f"/item/id/{item_with_short_code.pk}/" in response.content.decode()
 
 
 def test_parent_without_barcode_shows_no_brackets(client, item, item_without_barcode):

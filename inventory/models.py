@@ -13,8 +13,9 @@
 # PERFORMANCE OF THIS SOFTWARE.
 
 from django.db import models
-from django.urls import reverse
+from django.urls import NoReverseMatch, reverse
 from django.utils.translation import gettext_lazy as _
+
 
 class Tag(models.Model):
 	name = models.CharField(max_length=64)
@@ -114,10 +115,14 @@ class Item(models.Model):
 		return False
 
 	def get_absolute_url(self):
-		barcode = self.one_barcode()
-		if barcode:
-			return reverse('item', kwargs={'selectedid': barcode})
-		return reverse('item_by_id', kwargs={'item_id': self.pk})
+		return self.barcode_url() or reverse(
+			'item_by_id', kwargs={'item_id': self.pk})
+
+	def barcode_url(self):
+		code = self.one_barcode()
+		if not code:
+			return None
+		return _addressable_item_url(code)
 
 	def __str__(self):
 		return _(u"%(name)s (codes: %(barcodes)s)") % {'name': self.name, 'barcodes': self.barcodes()}
@@ -179,3 +184,10 @@ class Inventory(models.Model):
 	class Meta:
 		verbose_name = _("inventory")
 		verbose_name_plural = _("inventory")
+
+
+def _addressable_item_url(code):
+	try:
+		return reverse('item', kwargs={'selectedid': code})
+	except NoReverseMatch:
+		return None

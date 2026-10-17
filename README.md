@@ -55,8 +55,12 @@ URL pattern for item lookup. Defaults to `(4, 6)` when not set.
 BARCODE_CODE_LENGTH = (4, 8)
 ```
 
-Codes outside this range are not routed — the user gets a 404. The
-data model (`Barcode.code`, `max_length=10`) is a separate constraint.
+Nothing checks this range when a code is saved. `Barcode.code`
+accepts up to 10 characters either way.
+
+A code outside the range has no URL of its own. Looking it up
+returns 404. The item is still linked, by its id. Set the range to
+cover the codes you use.
 
 ## Server
 
