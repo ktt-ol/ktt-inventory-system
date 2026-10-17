@@ -139,6 +139,7 @@
             UV_NO_SYNC = "1";
             UV_PYTHON = "${pkgs.python313.interpreter}";
             UV_PYTHON_DOWNLOADS = "never";
+            E2E_BROWSER_EXECUTABLE = "${pkgs.chromium}/bin/chromium";
           };
           shellHook = ''
             unset PYTHONPATH
