@@ -6,3 +6,5 @@ inventar/settings.py
 .venv/
 tests/e2e/.venv/
 uploaded/
+
+/result*
