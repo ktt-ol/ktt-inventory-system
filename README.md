@@ -64,6 +64,13 @@ URL pattern for item lookup. Defaults to `(4, 6)` when not set.
 BARCODE_CODE_LENGTH = (4, 8)
 ```
 
+The container image reads it from the environment instead, as a
+comma separated pair:
+
+```
+BARCODE_CODE_LENGTH=1,10
+```
+
 Nothing checks this range when a code is saved. `Barcode.code`
 accepts up to 10 characters either way.
 

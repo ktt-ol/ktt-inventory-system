@@ -43,3 +43,9 @@ def test_csrf_trusted_origins_empty_without_the_variable(
     monkeypatch.delenv("CSRF_TRUSTED_ORIGINS", raising=False)
 
     assert container_settings().CSRF_TRUSTED_ORIGINS == []
+
+
+def test_barcode_code_length_from_environment(container_settings):
+    settings = container_settings(BARCODE_CODE_LENGTH="1,10")
+
+    assert settings.BARCODE_CODE_LENGTH == (1, 10)
