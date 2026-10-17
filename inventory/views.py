@@ -14,8 +14,7 @@
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Count, Q
-from django.shortcuts import get_object_or_404
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from inventory import models
 from inventory.forms import UploadFileForm
@@ -26,13 +25,11 @@ def home(request):
 	return render(request, 'home.html', {})
 
 
-def item(request, selectedid):
-	p = get_object_or_404(models.Barcode, pk=selectedid.upper())
-
+def _render_item(request, item_obj):
 	parentpath = []
 	temp_parentpath = []
 
-	x = p.item
+	x = item_obj
 	parentpath.append(x)
 	x = x.parent
 	while x:
@@ -42,7 +39,7 @@ def item(request, selectedid):
 		else:
 			x = x.parent
 
-	x = p.item
+	x = item_obj
 	while x:
 		temp_parentpath.append(x)
 		if x.temp_parent:
@@ -50,30 +47,42 @@ def item(request, selectedid):
 		else:
 			x = x.parent
 
-
 	temp_parentpath.reverse()
 	parentpath.reverse()
 
 	parameters = {
 		"user": request.user,
-		"id": p.item.id,
-		"image": p.item.image,
-		"name": p.item.name,
-		"codes": p.item.barcodes(),
-		"description": p.item.description,
-		"supplier": p.item.supplier,
-		"note": p.item.note,
-		"in_use": p.item.inUse,
-		"parent": p.item.parent,
-		"temporary_parent": p.item.temp_parent,
+		"id": item_obj.id,
+		"image": item_obj.image,
+		"name": item_obj.name,
+		"codes": item_obj.barcodes(),
+		"description": item_obj.description,
+		"supplier": item_obj.supplier,
+		"note": item_obj.note,
+		"in_use": item_obj.inUse,
+		"parent": item_obj.parent,
+		"temporary_parent": item_obj.temp_parent,
 		"parentpath": parentpath,
 		"temporary_parentpath": temp_parentpath,
-		"children": models.Item.objects.filter(Q(parent = p.item.id) | Q(temp_parent = p.item.id)),
-		"tags": p.item.tag.all(),
-		"owner": p.item.owner,
-
+		"children": models.Item.objects.filter(
+			Q(parent=item_obj.id) | Q(temp_parent=item_obj.id)
+		),
+		"tags": item_obj.tag.all(),
+		"owner": item_obj.owner,
 	}
 	return render(request, 'item.html', parameters)
+
+
+def item(request, selectedid):
+	p = get_object_or_404(models.Barcode, pk=selectedid.upper())
+	return _render_item(request, p.item)
+
+
+def item_by_id(request, item_id):
+	item_obj = get_object_or_404(models.Item, pk=item_id)
+	if item_obj.has_barcode():
+		return redirect(item_obj.get_absolute_url())
+	return _render_item(request, item_obj)
 
 
 def search(request, term):

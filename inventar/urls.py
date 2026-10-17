@@ -19,6 +19,7 @@ from django.urls import path, re_path
 
 from inventory.views import home
 from inventory.views import item
+from inventory.views import item_by_id
 from inventory.views import search
 from inventory.views import graph
 from inventory.views import stats
@@ -27,6 +28,7 @@ from inventory.views import upload
 urlpatterns = [
     path('', home, name='home'),
     re_path(r'^item/(?P<selectedid>[0-9A-Za-z]{4,6})/$', item, name='item'),
+    path('item/id/<int:item_id>/', item_by_id, name='item_by_id'),
     path('search/<str:term>/', search, name='search'),
     path('graph/', graph, name='graph'),
     path('stats/', stats, name='stats'),

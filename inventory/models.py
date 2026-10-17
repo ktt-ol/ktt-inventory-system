@@ -12,8 +12,9 @@
 # OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
 
-from django.utils.translation import gettext_lazy as _
 from django.db import models
+from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 class Tag(models.Model):
 	name = models.CharField(max_length=64)
@@ -111,6 +112,12 @@ class Item(models.Model):
 		if self.barcodes() != "":
 			return True
 		return False
+
+	def get_absolute_url(self):
+		barcode = self.one_barcode()
+		if barcode:
+			return reverse('item', kwargs={'selectedid': barcode})
+		return reverse('item_by_id', kwargs={'item_id': self.pk})
 
 	def __str__(self):
 		return _(u"%(name)s (codes: %(barcodes)s)") % {'name': self.name, 'barcodes': self.barcodes()}
