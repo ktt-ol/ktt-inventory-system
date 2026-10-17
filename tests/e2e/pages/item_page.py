@@ -12,3 +12,8 @@ class ItemPage:
         expect(self._page).to_have_url(
             re.compile(rf"/item/{re.escape(code)}/$")
         )
+
+    def expect_url_by_id(self) -> None:
+        expect(self._page).to_have_url(
+            re.compile(r"/item/id/\d+/$")
+        )

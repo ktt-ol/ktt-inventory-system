@@ -34,11 +34,13 @@ def empty_db(transactional_db):
 
 @pytest.fixture
 def area(db):
+    """First BusinessArea from baseline data."""
     return BusinessArea.objects.first()
 
 
 @pytest.fixture
 def category(db):
+    """First Category from baseline data."""
     return Category.objects.first()
 
 
@@ -56,6 +58,7 @@ def item(db, area, category):
 
 @pytest.fixture
 def item_without_barcode(db, area, category):
+    """Item without any barcode."""
     return Item.objects.create(
         name="Unlabeled item",
         business_area=area,
