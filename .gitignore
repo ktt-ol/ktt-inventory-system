@@ -3,6 +3,6 @@
 inventar.db
 inventar/settings.py
 .idea/
-venv/
+.venv/
 tests/e2e/.venv/
 uploaded/
