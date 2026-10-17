@@ -17,13 +17,6 @@ from django.urls import NoReverseMatch, reverse
 from django.utils.translation import gettext_lazy as _
 
 
-def _addressable_item_url(code):
-	try:
-		return reverse('item', kwargs={'selectedid': code})
-	except NoReverseMatch:
-		return None
-
-
 class Tag(models.Model):
 	name = models.CharField(max_length=64)
 	icon = models.FileField(upload_to="icons/", blank=True, null=True)
@@ -191,3 +184,10 @@ class Inventory(models.Model):
 	class Meta:
 		verbose_name = _("inventory")
 		verbose_name_plural = _("inventory")
+
+
+def _addressable_item_url(code):
+	try:
+		return reverse('item', kwargs={'selectedid': code})
+	except NoReverseMatch:
+		return None
