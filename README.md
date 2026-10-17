@@ -43,6 +43,21 @@ database once with sample inventory data (`tests/conftest.py`).
 Most tests run against this baseline. Tests that need an empty
 database request the `empty_db` fixture.
 
+## Configuration
+
+### `BARCODE_CODE_LENGTH`
+
+Tuple of `(min, max)` controlling the accepted barcode code length
+in the UI. Affects the search input `maxlength` attribute and the
+URL pattern for item lookup. Defaults to `(4, 6)` when not set.
+
+```python
+BARCODE_CODE_LENGTH = (4, 8)
+```
+
+Codes outside this range are not routed — the user gets a 404. The
+data model (`Barcode.code`, `max_length=10`) is a separate constraint.
+
 ## Server
 
 ```shell
