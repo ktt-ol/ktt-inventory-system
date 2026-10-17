@@ -4,4 +4,5 @@ inventar.db
 inventar/settings.py
 .idea/
 venv/
+tests/e2e/.venv/
 uploaded/
