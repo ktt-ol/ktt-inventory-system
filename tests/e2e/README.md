@@ -34,5 +34,3 @@ provides instead:
 ```sh
 E2E_BROWSER_EXECUTABLE=$(which chromium) uv run pytest -v
 ```
-
-Unset, the browser Playwright pins is used.
