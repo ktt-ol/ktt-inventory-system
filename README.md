@@ -23,6 +23,14 @@ Set the following parameters:
 - `SECRET_KEY`
 - `AUTHENTICATION_BACKENDS`
 
+Compile the German catalog:
+
+```shell
+uv run python manage.py compilemessages -i .venv
+```
+
+Needs `gettext`.
+
 ### NixOS
 
 On NixOS, pip-installed Python C extensions (like greenlet) cannot
