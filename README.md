@@ -10,6 +10,19 @@ Install dependencies with [uv](https://docs.astral.sh/uv/):
 uv sync
 ```
 
+`inventar/settings.py` is not checked in. It has to be created from
+the template:
+
+```shell
+cp inventar/settings.template.py inventar/settings.py
+```
+
+Set the following parameters:
+
+- `DATABASES['default']['NAME']`
+- `SECRET_KEY`
+- `AUTHENTICATION_BACKENDS`
+
 ### NixOS
 
 On NixOS, pip-installed Python C extensions (like greenlet) cannot
