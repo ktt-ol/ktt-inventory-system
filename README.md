@@ -105,6 +105,12 @@ cover the codes you use.
 apt install nginx uwsgi uwsgi-plugin-python3
 ```
 
+Make sure that `STATIC_ROOT` in `inventar/settings.py` is set.
+
+```shell
+uv run python manage.py collectstatic --noinput
+```
+
 `/etc/uwsgi/apps-enabled/ktt-inventar.ini`:
 
 ```ini
@@ -144,7 +150,8 @@ server {
         # static files are not passed to uwsgi
         location /media {
         }
-        location /static {
+        location /static/ {
+                alias /var/www/ktt-inventory-system/static/;
         }
         location /other {
         }
