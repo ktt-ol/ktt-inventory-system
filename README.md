@@ -117,7 +117,7 @@ uv run python manage.py collectstatic --noinput
 [uwsgi]
 plugin          = python3
 virtualenv      = /var/www/ktt-inventory-system/.venv
-pythonpath      = /var/www/ktt-inventory-system/.venv
+pythonpath      = /var/www/ktt-inventory-system
 
 chdir           = /var/www/ktt-inventory-system
 wsgi-file       = /var/www/ktt-inventory-system/inventory-wsgi.py
