@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 
 from inventory.conf import get_barcode_code_length
+from inventory.errors import raise_not_found, raise_server_error
 from inventory.views import home
 from inventory.views import item
 from inventory.views import item_by_id
@@ -36,5 +37,7 @@ urlpatterns = [
     path('graph/', graph, name='graph'),
     path('stats/', stats, name='stats'),
     path('upload/', upload, name='upload'),
+    path('error/404/', raise_not_found, name='error_404'),
+    path('error/500/', raise_server_error, name='error_500'),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
