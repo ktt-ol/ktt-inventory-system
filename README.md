@@ -10,6 +10,27 @@ Install dependencies with [uv](https://docs.astral.sh/uv/):
 uv sync
 ```
 
+`inventar/settings.py` is not checked in. It has to be created from
+the template:
+
+```shell
+cp inventar/settings.template.py inventar/settings.py
+```
+
+Set the following parameters:
+
+- `DATABASES['default']['NAME']`
+- `SECRET_KEY`
+- `AUTHENTICATION_BACKENDS`
+
+Compile the German catalog:
+
+```shell
+uv run python manage.py compilemessages -i .venv
+```
+
+Needs `gettext`.
+
 ### NixOS
 
 On NixOS, pip-installed Python C extensions (like greenlet) cannot
@@ -84,12 +105,19 @@ cover the codes you use.
 apt install nginx uwsgi uwsgi-plugin-python3
 ```
 
-/etc/uwsgi/apps-enabled/ktt-inventar.ini
+Make sure that `STATIC_ROOT` in `inventar/settings.py` is set.
+
+```shell
+uv run python manage.py collectstatic --noinput
+```
+
+`/etc/uwsgi/apps-enabled/ktt-inventar.ini`:
+
 ```ini
 [uwsgi]
 plugin          = python3
-virtualenv      = /var/www/ktt-inventory-system/venv
-pythonpath      = /var/www/ktt-inventory-system/venv
+virtualenv      = /var/www/ktt-inventory-system/.venv
+pythonpath      = /var/www/ktt-inventory-system
 
 chdir           = /var/www/ktt-inventory-system
 wsgi-file       = /var/www/ktt-inventory-system/inventory-wsgi.py
@@ -109,7 +137,8 @@ processes       = 2
 #chmod-socket = 664
 ```
 
-/etc/nginx/sites-enabled/ktt-inventory
+`/etc/nginx/sites-enabled/ktt-inventory`:
+
 ```
 server {
         listen 82 default_server;
@@ -121,7 +150,8 @@ server {
         # static files are not passed to uwsgi
         location /media {
         }
-        location /static {
+        location /static/ {
+                alias /var/www/ktt-inventory-system/static/;
         }
         location /other {
         }
