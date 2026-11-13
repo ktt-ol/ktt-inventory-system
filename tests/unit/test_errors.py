@@ -1,5 +1,6 @@
 import pytest
 
+from django.contrib.auth.models import User
 from django.test import Client
 from django.urls import reverse
 
@@ -13,9 +14,15 @@ def error_client():
 
 
 @pytest.fixture
-def staff_client(error_client, admin_user):
+def staff_user(db):
+    """Staff user."""
+    return User.objects.create_user(username="stub-staff", is_staff=True)
+
+
+@pytest.fixture
+def staff_client(error_client, staff_user):
     """Error client logged in as a staff user."""
-    error_client.force_login(admin_user)
+    error_client.force_login(staff_user)
     return error_client
 
 
